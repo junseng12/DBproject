@@ -13,8 +13,9 @@
 .menu {
   box-sizing: border-box;
 
-  width: 969px;
+  width: 100%;
   height: 46px;
+  padding: 10px;
 
   background: #ffffff;
   border: 0.5px solid #c2c2c2;

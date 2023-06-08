@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React from "react";
 import AjouUniv from "../assets/AjouUnivlogo.png";
 import AjouRental from "../assets/AjouRentallogo.png";
@@ -22,12 +21,40 @@ function Header() {
           marginTop: "20px",
         }}
       >
-        <img
-          src={AjouUniv}
-          style={{ margin: "10px", width: "127px", height: "123px" }}
-          alt="Logo"
+        <div
+          style={{
+            width: "127px",
+            height: "123px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "flex-start",
+            textAlign: "center",
+            marginTop: "20px",
+            position: "absolute",
+            left: 0,
+            top: 0,
+            backgroundImage: `url(${AjouUniv})`, // 배경으로 설정
+            backgroundPosition: "left center",
+            backgroundRepeat: "no-repeat",
+          }}
         />
-        <img src={AjouRental} style={{ margin: "10px" }} alt="Logo" />
+
+        <div
+          style={{
+            flex: "1",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <img
+            src={AjouRental}
+            style={{
+              margin: "10px",
+            }}
+            alt="Logo"
+          />
+        </div>
       </div>
     </header>
   );

@@ -106,7 +106,7 @@ function Admin({ isLoggedIn, changeLogInpage, getUserInfo }) {
         </>
 
         <>
-          {showapplyRecord ? (
+          {/* {showapplyRecord ? (
             <div className={styles.applyRecordsContainer}>
               <h2>물품 신청 내역</h2>
               {applyRecords.length > 0 ? (
@@ -128,7 +128,7 @@ function Admin({ isLoggedIn, changeLogInpage, getUserInfo }) {
                 <p>물품 신청 내역이 없습니다.</p>
               )}
             </div>
-          ) : null}
+          ) : null} */}
         </>
 
         <>

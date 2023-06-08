@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
+import AjouBackground from "../assets/AjouBackground.png";
+
 import styles from "./Main.module.css";
 // import Registeration from "../components/RegisterationForm";
 import Private from "../components/Private";
@@ -59,45 +61,50 @@ function Main() {
         </li>
       </ul>
 
-      <div className={styles.contentsContainer}>
-        {/*조건에 따라 다른 Page 렌더링*/}
-        {/* {currentPage === "Private" && <Private/>}
+      <div
+        className={styles.background}
+        style={{ backgroundImage: `url(${AjouBackground})` }}
+      >
+        <div className={styles.contentsContainer}>
+          {/*조건에 따라 다른 Page 렌더링*/}
+          {/* {currentPage === "Private" && <Private/>}
       {currentPage === "Search" && <SearchComponent />}
       {currentPage === "apply" && <ApplyComponent />}*/}
 
-        {currentPage === "Private" && (
-          <Private
-            isLoggedIn={isLoggedIn}
-            changeLogInpage={handleButtonClick}
-            loggedInUser={loggedInUser}
-          />
-        )}
-        {currentPage === "Search" && (
-          <Routes>
-            <Route
-              path="*"
-              element={
-                <Search
-                  isLoggedIn={isLoggedIn}
-                  changeLogInpage={handleButtonClick}
-                  loggedInUser={loggedInUser}
-                />
-              }
+          {currentPage === "Private" && (
+            <Private
+              isLoggedIn={isLoggedIn}
+              changeLogInpage={handleButtonClick}
+              loggedInUser={loggedInUser}
             />
-          </Routes>
-        )}
-        {currentPage === "Apply" && (
-          <Apply
-            isLoggedIn={isLoggedIn}
-            changeLogInpage={handleButtonClick}
-            loggedInUser={loggedInUser}
-          />
-        )}
+          )}
+          {currentPage === "Search" && (
+            <Routes>
+              <Route
+                path="*"
+                element={
+                  <Search
+                    isLoggedIn={isLoggedIn}
+                    changeLogInpage={handleButtonClick}
+                    loggedInUser={loggedInUser}
+                  />
+                }
+              />
+            </Routes>
+          )}
+          {currentPage === "Apply" && (
+            <Apply
+              isLoggedIn={isLoggedIn}
+              changeLogInpage={handleButtonClick}
+              loggedInUser={loggedInUser}
+            />
+          )}
 
-        {currentPage === "Login" && (
-          <Login handleLogin={handleLogin} saveLoginInfo={saveLoginInfo} />
-        )}
-        {/* {currentPage === "Register" && <Registeration />} */}
+          {currentPage === "Login" && (
+            <Login handleLogin={handleLogin} saveLoginInfo={saveLoginInfo} />
+          )}
+          {/* {currentPage === "Register" && <Registeration />} */}
+        </div>
       </div>
     </div>
   );
