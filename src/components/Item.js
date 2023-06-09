@@ -25,8 +25,9 @@ function Item({ category_name, item_img, numOfTotal, numOfAvailable }) {
       <div>
         <div className={styles.item_name}>
           <div>{category_name}</div>
-          <div>{numOfTotal}</div>
-          <div>{numOfAvailable}</div>
+          <div>
+            {numOfAvailable} / {numOfTotal}
+          </div>
           {/* <div>${category_id}</div> */}
         </div>
 
