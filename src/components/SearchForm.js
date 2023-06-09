@@ -205,8 +205,8 @@ function SearchForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
               numOfAvailable={item.numOfAvailable}
             />
             <div className={styles.item_status}>
-              <ItemStatus status_id={item.status_id} />
-              {item.status_id === 0 && (
+              <ItemStatus numOfAvailable={item.numOfAvailabled} />
+              {item.numOfAvailable > 0 && (
                 <button
                   className={styles.btn}
                   onClick={(event) => handleRent(event, item)}
@@ -214,16 +214,13 @@ function SearchForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
                   대여하기
                 </button>
               )}
-              {item.status_id === 1 && (
+              {item.numOfAvailable === 0 && (
                 <button
                   className={styles.btn}
                   onClick={(event) => handleReserve(event, item)}
                 >
                   예약하기
                 </button>
-              )}
-              {item.status_id === 2 && (
-                <button className={styles.btn}>대여/예약불가</button>
               )}
             </div>
           </div>

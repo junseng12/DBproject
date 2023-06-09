@@ -1,18 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function ItemStatus({ status_id }) {
+function ItemStatus({ numOfAvailable }) {
   // 조건부 스타일링을 위한 변수 설정
   const containerStyle = {
     position: "relative",
     width: "80px",
     height: "25px",
-    border: status_id === 2 ? "1px solid #6E6E6E" : "1px solid #1a73bc",
+    border: numOfAvailable === 0 ? "1px solid #6E6E6E" : "1px solid #1a73bc",
     borderRadius: "15px",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    color: status_id === 2 ? "#6E6E6E" : "#1a73bc", // status_id가 2인 경우에만 색상을 변경
+    color: numOfAvailable === 0 ? "#6E6E6E" : "#1a73bc", // status_id가 2인 경우에만 색상을 변경
   };
 
   const statusStyle = {
@@ -27,18 +27,14 @@ function ItemStatus({ status_id }) {
   let statusText = "";
   let statusClassName = "";
 
-  switch (status_id) {
+  switch (numOfAvailable) {
     case 0:
-      statusText = "대여 가능";
-      statusClassName = "rentable";
-      break;
-    case 1:
       statusText = "예약 가능";
       statusClassName = "reservable";
-      break;
-    case 2:
-      statusText = "예약 불가";
-      statusClassName = "unavailable";
+
+    case 1:
+      statusText = "대여 가능";
+      statusClassName = "rentable";
       break;
     default:
       statusText = "알 수 없음";
