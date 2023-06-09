@@ -33,7 +33,7 @@ function Main() {
 
   // 관리자 여부 확인 함수
   const isAdmin = () => {
-    if (isLoggedIn && loggedInUser.authority === 1) {
+    if (isLoggedIn && loggedInUser.authority === true) {
       return true;
     }
     return false;
