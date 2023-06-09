@@ -28,11 +28,11 @@ function ItemStatus({ numOfAvailable }) {
   let statusClassName = "";
 
   switch (numOfAvailable) {
-    case 0:
+    case numOfAvailable === 0:
       statusText = "예약 가능";
       statusClassName = "reservable";
-
-    case 1:
+      break;
+    case numOfAvailable > 0:
       statusText = "대여 가능";
       statusClassName = "rentable";
       break;
