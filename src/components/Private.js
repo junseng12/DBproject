@@ -155,8 +155,7 @@ function Private({ isLoggedIn, changeLogInpage, loggedInUser }) {
                 <div>학번: {userInfo.student_id}</div>
                 <div>이메일: {userInfo.email}</div>
                 <div>이름: {userInfo.name}</div>
-                <div>전화번호: {userInfo.phoneNumber}</div>
-                <div>비밀번호: {userInfo.password}</div>
+                <div>전화번호: {userInfo.phone_num}</div>
                 <div>학과: {userInfo.department}</div>
               </div>
             </div>
@@ -210,7 +209,7 @@ function Private({ isLoggedIn, changeLogInpage, loggedInUser }) {
                         numOfTotal={item.numOfTotal}
                         numOfAvailable={item.numOfAvailable}
                       />
-                      <div>대여일자: {item.timestamp}</div>
+                      <div>대여일자: {item.start_date}</div>
                       <button onClick={() => handleExtendRental(index)}>
                         연장하기
                       </button>

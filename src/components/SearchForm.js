@@ -205,7 +205,7 @@ function SearchForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
               numOfAvailable={item.numOfAvailable}
             />
             <div className={styles.item_status}>
-              <ItemStatus numOfAvailable={item.numOfAvailabled} />
+              <ItemStatus numOfAvailable={item.numOfAvailable} />
               {item.numOfAvailable > 0 && (
                 <button
                   className={styles.btn}
