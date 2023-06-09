@@ -161,7 +161,7 @@ function SearchForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
         {/* 버튼 별로 status_id에 따른 item들을 보이도록 함 */}
         <button
           onClick={() => {
-            setshowCondition(2);
+            setshowCondition(0);
             console.log(showCondition);
             setCurrentPage(1);
           }}
@@ -170,7 +170,7 @@ function SearchForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
         </button>
         <button
           onClick={() => {
-            setshowCondition(0);
+            setshowCondition(1);
             console.log(showCondition);
             setCurrentPage(1);
           }}
@@ -180,7 +180,7 @@ function SearchForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
         {/* 예약 가능한 물품 - 삭제인지 확인 가능한 것인지 */}
         <button
           onClick={() => {
-            setshowCondition(1);
+            setshowCondition(2);
             console.log(showCondition);
             setCurrentPage(1);
           }}
