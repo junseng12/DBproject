@@ -3,6 +3,11 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 
+const API_PORT = 8080; // 백엔드 서버의 포트 번호
+
+// 백엔드 서버와의 통신을 위한 API 주소
+const API_URL = `http://localhost:${API_PORT}/api`;
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);
 

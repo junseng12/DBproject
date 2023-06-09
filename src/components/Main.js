@@ -10,6 +10,7 @@ import Private from "../components/Private";
 import Search from "../components/SearchForm";
 import Login from "../components/LoginForm";
 import Apply from "../components/ApplyForm";
+import Menu from "../components/Menu";
 
 function Main() {
   const [currentPage, setCurrentPage] = useState("Home");
@@ -30,36 +31,22 @@ function Main() {
     setLoggedInUser(userData);
   };
 
+  // 관리자 여부 확인 함수
+  const isAdmin = () => {
+    if (isLoggedIn && loggedInUser.authority === 1) {
+      return true;
+    }
+    return false;
+  };
+
   return (
     <div className={styles.container}>
-      <ul className={styles.menu}>
-        <li className={styles.menuItem}>
-          <button onClick={() => handleButtonClick("Private")}>
-            마이페이지
-          </button>
-        </li>
-        <li className={styles.menuItem}>
-          <button onClick={() => handleButtonClick("Search")}>물품조회</button>
-        </li>
-        <li className={styles.menuItem}>
-          <button onClick={() => handleButtonClick("Apply")}>물품신청</button>
-        </li>
-        <li className={styles.menuItem}>
-          {/* 로그인 시, 로그아웃으로 명칭 변경되어야 함 
-          다른 페이지에서도 로그아웃이 되면 */}
-          {isLoggedIn ? (
-            <button
-              onClick={() => {
-                setIsLoggedIn(false);
-              }}
-            >
-              로그아웃
-            </button>
-          ) : (
-            <button onClick={() => handleButtonClick("Login")}>로그인</button>
-          )}
-        </li>
-      </ul>
+      <Menu
+        isLoggedIn={!!loggedInUser}
+        handleButtonClick={handleButtonClick}
+        setIsLoggedIn={setIsLoggedIn}
+        isAdmin={isAdmin}
+      />
 
       <div
         className={styles.background}
@@ -78,6 +65,7 @@ function Main() {
               loggedInUser={loggedInUser}
             />
           )}
+
           {currentPage === "Search" && (
             <Routes>
               <Route
@@ -94,6 +82,23 @@ function Main() {
           )}
           {currentPage === "Apply" && (
             <Apply
+              isLoggedIn={isLoggedIn}
+              changeLogInpage={handleButtonClick}
+              loggedInUser={loggedInUser}
+            />
+          )}
+
+          {/* 관리자 관련 Page */}
+          {currentPage === "RentMge" && (
+            <Apply
+              isLoggedIn={isLoggedIn}
+              changeLogInpage={handleButtonClick}
+              loggedInUser={loggedInUser}
+            />
+          )}
+
+          {currentPage === "ItemMge" && (
+            <Private
               isLoggedIn={isLoggedIn}
               changeLogInpage={handleButtonClick}
               loggedInUser={loggedInUser}

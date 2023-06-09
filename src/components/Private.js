@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Private.module.css";
 import Item from "./Item";
+import axios from "axios";
 
 function Private({ isLoggedIn, changeLogInpage, loggedInUser }) {
   const [userInfo, setUserInfo] = useState(null);
@@ -39,17 +40,61 @@ function Private({ isLoggedIn, changeLogInpage, loggedInUser }) {
     setShowRentalRecords(false);
     setShowapplyRecord(true);
   };
-  // 사용자 대여 물품 내역 확인하는 함수
-  const handleRentalRecordsClick = () => {
-    const savedRentalRecords =
-      JSON.parse(localStorage.getItem("rentalRecords")) || [];
-    setRentalRecords(savedRentalRecords);
-    setShowInfo(false);
-    setShowapplyRecord(false);
-    setShowRentalRecords(true);
+  // // 사용자 대여 물품 내역 확인하는 함수
+  // const handleRentalRecordsClick = () => {
+  //   const savedRentalRecords =
+  //     JSON.parse(localStorage.getItem("rentalRecords")) || [];
+  //   setRentalRecords(savedRentalRecords);
+  //   setShowInfo(false);
+  //   setShowapplyRecord(false);
+  //   setShowRentalRecords(true);
+  // };
+
+  // 대여 조회 API 함수
+  const fetchRentalRecords = async () => {
+    try {
+      const response = await axios.get("/rent/mylist");
+
+      if (response.status === 200) {
+        const rentalData = response.data;
+        setRentalRecords(rentalData);
+
+        //Rental한 내역 조회하도록 설정
+        setShowInfo(false);
+        setShowapplyRecord(false);
+        setShowRentalRecords(true);
+      } else {
+        // 대여 조회 API 요청이 실패한 경우
+        console.error(response.data);
+        console.error(response.data.errorMessage);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  // 사용자 물품 신청 데이터 삭제하는 함수
+  //대여 연장 API 함수
+  const handleExtendRental = async (index) => {
+    try {
+      const item = rentalRecords[index];
+      const itemId = item.item_id;
+      const response = await axios.get(`/rent/extend/${itemId}`);
+
+      if (response.status === 200) {
+        // 연장 성공
+        // 세부 변경 필요
+        const updatedRentalRecords = [...rentalRecords];
+        updatedRentalRecords[index] = response.data.updatedItem;
+        setRentalRecords(updatedRentalRecords);
+      } else {
+        console.error(response.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // 사용자 물품 신청 데이터 삭제하는 함수 - API 구현
   const handleCancelApply = (index) => {
     const updatedApplyRecords = [...applyRecords];
     updatedApplyRecords.splice(index, 1); // 선택한 물품 신청 내역 삭제
@@ -59,13 +104,13 @@ function Private({ isLoggedIn, changeLogInpage, loggedInUser }) {
   };
 
   // 사용자 대여 물품 데이터 삭제하는 함수
-  const handleCancelRental = (index) => {
-    const updatedRentalRecords = [...rentalRecords];
-    updatedRentalRecords.splice(index, 1);
+  // const handleCancelRental = (index) => {
+  //   const updatedRentalRecords = [...rentalRecords];
+  //   updatedRentalRecords.splice(index, 1);
 
-    setApplyRecords(updatedRentalRecords);
-    localStorage.setItem("rentalRecords", JSON.stringify(updatedRentalRecords));
-  };
+  //   setApplyRecords(updatedRentalRecords);
+  //   localStorage.setItem("rentalRecords", JSON.stringify(updatedRentalRecords));
+  // };
 
   if (!isLoggedIn) {
     alert("로그인이 필요한 서비스입니다.");
@@ -79,7 +124,7 @@ function Private({ isLoggedIn, changeLogInpage, loggedInUser }) {
         <div className={styles.menu}>
           <button onClick={showUserInfo}>내 정보</button>
           {/* 대여 현황에서 연체 일 표시되도록 */}
-          <button onClick={handleRentalRecordsClick}>대여 현황 조회</button>
+          <button onClick={fetchRentalRecords}>대여 현황 조회</button>
           <button>분실신고 내역 조회</button>
           <button onClick={handleApplyRecordsClick}>물품 신청 내역 조회</button>
         </div>
@@ -141,7 +186,7 @@ function Private({ isLoggedIn, changeLogInpage, loggedInUser }) {
                         status_id={item.status_id}
                       />
                       <div>대여일자: {item.timestamp}</div>
-                      <button onClick={() => handleCancelRental(index)}>
+                      <button onClick={() => handleExtendRental(index)}>
                         연장하기
                       </button>
                     </li>

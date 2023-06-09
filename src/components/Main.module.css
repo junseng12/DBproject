@@ -2,48 +2,6 @@
   width: 100%;
 }
 
-.menu {
-  box-sizing: border-box;
-
-  width: 969px;
-  height: 46px;
-  margin: auto;
-
-  background: #ffffff;
-  border: 1px solid #c2c2c2;
-  border-radius: 30px;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.menuItem {
-  flex: 1;
-  list-style: none;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-.menuItem button {
-  flex: 1;
-  text-decoration: none;
-  color: inherit;
-  font-family: "Gmarket Sans TTF";
-  font-style: normal;
-  font-weight: 300;
-  font-size: 20px;
-  line-height: 23px;
-  text-align: center;
-
-  border: none;
-  background-color: transparent;
-}
-
 .contentsContainer {
   margin-top: 40px;
   display: flex;
