@@ -65,36 +65,36 @@ const LoginForm = ({ handleLogin, saveLoginInfo }) => {
     }
   }
 
-  // // 데이터베이스에서 정보 가져와 비교 진행함
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   // 로그인 처리 로직 작성
-  //   console.log("학번:", student_id);
-  //   console.log("비밀번호:", password);
+  // 데이터베이스에서 정보 가져와 비교 진행함
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // 로그인 처리 로직 작성
+    console.log("학번:", student_id);
+    console.log("비밀번호:", password);
 
-  //   let matchFound = false;
+    let matchFound = false;
 
-  //   // localStorage에서 저장된 데이터 가져오기
-  //   for (let i = 0; i < localStorage.length; i++) {
-  //     const key = localStorage.key(i);
-  //     const storedData = JSON.parse(localStorage.getItem(key));
-  //     const storedStudentId = storedData.student_id;
-  //     const storedPassword = storedData.password;
+    // localStorage에서 저장된 데이터 가져오기
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      const storedData = JSON.parse(localStorage.getItem(key));
+      const storedStudentId = storedData.student_id;
+      const storedPassword = storedData.password;
 
-  //     if (student_id === storedStudentId && password === storedPassword) {
-  //       matchFound = true;
-  //       break;
-  //     }
-  //   }
+      if (student_id === storedStudentId && password === storedPassword) {
+        matchFound = true;
+        break;
+      }
+    }
 
-  //   if (matchFound) {
-  //     setIsLoggedIn(true);
-  //     setLoginError(false);
-  //     handleLogin();
-  //   } else {
-  //     setLoginError(true);
-  //   }
-  // };
+    if (matchFound) {
+      setIsLoggedIn(true);
+      setLoginError(false);
+      handleLogin();
+    } else {
+      setLoginError(true);
+    }
+  };
 
   //회원가입 창 띄우고 내리는 함수
   const handleRegister = () => {
@@ -110,7 +110,7 @@ const LoginForm = ({ handleLogin, saveLoginInfo }) => {
           {isLoggedIn ? (
             <div>{/* 로그인 후에 표시할 내용 */}</div>
           ) : (
-            <form onSubmit={checkLogin} className={styles.container}>
+            <form onSubmit={handleSubmit} className={styles.container}>
               {loginError && (
                 <div className={styles.error}>
                   유효하지 않은 학번 또는 비밀번호입니다.

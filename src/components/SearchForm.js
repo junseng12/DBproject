@@ -190,13 +190,19 @@ function SearchForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
       </div>
       <div className={styles.itemGrid}>
         {currentItems.map((item) => (
-          <div key={item.item_id} className={styles.itemContainer}>
-            <Item
-              item_id={item.item_id}
+          <div key={item.category_name} className={styles.itemContainer}>
+            {/* <Item
+              category_name={item.item_id}
               item_img={item.item_img}
               name={item.name}
               category_id={item.category_id}
               status_id={item.status_id}
+            /> */}
+            <Item
+              category_name={item.category_name}
+              item_img={img}
+              numOfTotal={item.numOfTotal}
+              numOfAvailable={item.numOfAvailable}
             />
             <div className={styles.item_status}>
               <ItemStatus status_id={item.status_id} />

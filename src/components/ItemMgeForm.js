@@ -11,19 +11,29 @@ function ItemMgeForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
   const [items, setItems] = useState([]);
   //현재 item이 나열되는 페이지 번호
   const [currentPage, setCurrentPage] = useState(1);
-  //페이지 당 표현될 수 있는 최대 item 수
-  const itemsPerPage = 6;
+
+  // //페이지 당 표현될 수 있는 최대 item 수
+  // const itemsPerPage = 6;
   //물품 조회 종류(전체, 대여가능, 예약 가능)에 따른 filtering 조건
   const [showCondition, setshowCondition] = useState(0);
-
+  const [applyList, setApplyList] = useState([]);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   // //사용자 정보 넣어놓기
   // const userInfo = loggedInUser;
   // const { student_id } = userInfo;
+  const [itemName, setItemName] = useState("");
+  const [number, setNumber] = useState(0);
+  const handleItemNameChange = (event) => {
+    setItemName(event.target.value);
+  };
+
+  const handleNumberChange = (event) => {
+    setNumber(event.target.value);
+  };
 
   //물품 조회 API
-  //물품 추가 조회 API
-
   //신청 내역 조회 API
+  //물품 추가 조회 API
 
   useEffect(() => {
     //전체 물품 조회
@@ -31,17 +41,20 @@ function ItemMgeForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
       fetchItems();
       //신청 물품 조회
     } else if (showCondition === 1) {
-      fetchAvailableRentalItems();
+      fetchApplyList();
+      console.log(applyList);
       //물품 추가
     } else if (showCondition === 2) {
-      fetchAvailableReserveItems();
+      console.log(itemName);
+      // 새로 item 불러옴
+      fetchItems();
     }
   }, [showCondition]);
 
-  // 전체 물품 조회 API 호출 함수
+  // 전체 물품 조회 API 호출 함수 - 관리자
   const fetchItems = async () => {
     try {
-      const response = await axios.get("/item/list");
+      const response = await axios.get("/item/list/admin");
       setItems(response.data);
       console.log(response.data);
     } catch (error) {
@@ -49,102 +62,46 @@ function ItemMgeForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
     }
   };
 
-  // 대여 가능한 물품 조회 API 호출 함수
-  const fetchAvailableRentalItems = async () => {
+  // 신청 물품 조회 API 호출 함수 - 관리자
+  const fetchApplyList = async () => {
     try {
-      const response = await axios.get("/item/list/available-rental");
-      setItems(response.data);
+      const response = await axios.get("/apply/list");
+      setApplyList(response.data);
       console.log(response.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  // 예약 가능한 물품 조회 API 호출 함수
-  const fetchAvailableReserveItems = async () => {
-    try {
-      const response = await axios.get("/item/list/available-reserve");
-      setItems(response.data);
-      console.log(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handlePageChange = (pageNumber) => {
+  //   setCurrentPage(pageNumber);
+  // };
 
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
+  // const indexOfLastItem = currentPage * itemsPerPage;
+  // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  // const currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
+  // const totalPages = Math.ceil(items.length / itemsPerPage);
 
-  const currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(items.length / itemsPerPage);
-
-  //Item을 예약하는 로직
-  async function handleRent(event, item) {
-    const confirmation = window.confirm("물품 대여를 진행하시겠습니까?");
+  //물품 추가 조회 API - 관리자
+  async function handleAddItem(event, item) {
+    const confirmation = window.confirm("물품 추가을 진행하시겠습니까?");
 
     if (confirmation) {
-      // 대여 가능한 경우
-      console.log("대여가능");
-
-      // 대여 API 호출
-      try {
-        const response = await axios.post("/rent", {
-          rent_id: "대여번호",
-          start_date: new Date().toLocaleString(), // 대여 시각 (POST한 시각)
-          end_date: new Date().toLocaleString() + 14, // 대여 시각으로부터 2주로 고정
-          extension_num: 0,
-          student_id: student_id,
-          item_id: item.item_id,
-        });
-
-        if (response.status === 201) {
-          // 대여 성공
-          console.log(response.msg);
-
-          // ITEM 테이블에서 해당 물품 상태 대여중으로 업데이트
-          await axios.put(`/item/${item.item_id}`, {
-            status_id: "대여 중",
-          });
-        } else {
-          // 대여 실패
-          console.log("대여에 실패했습니다.");
-        }
-      } catch (error) {
-        // 오류 처리
-        console.error("대여 과정에서 오류가 발생했습니다.", error);
-      }
-    }
-  }
-
-  async function handleReserve(event, item) {
-    const confirmation = window.confirm("물품 추가를 진행하시겠습니까?");
-
-    if (confirmation) {
-      // 물품 추가 가능한 경우
+      // 추가 가능한 경우
       console.log("추가가능");
 
-      // 물품 추가 API 호출
+      // 추가 API 호출
       try {
-        const response = await axios.post("/rent", {
-          reserve_id: "예약번호",
-          student_id: student_id,
-          category_id: item.category_id,
-        });
-
-        if (response.status === 201) {
-          // 물품 추가 성공
-          console.log(response.msg);
-        } else {
-          // 물품 추가 실패
-          console.log("추가에 실패했습니다.");
-        }
+        const response = await axios.post(`/item/add/${item.itemName}`);
+        console.log(response.data);
+        // 물품 추가 성공 시 추가한 물품을 신청 내역에 업데이트하거나 다른 동작을 수행할 수 있습니다.
+        // fetchRentalHistory();
+        setIsSubmitted(true);
       } catch (error) {
-        // 오류 처리
-        console.error("추가 과정에서 오류가 발생했습니다.", error);
+        console.log(error);
       }
+      setIsSubmitted(true);
     }
   }
 
@@ -160,7 +117,7 @@ function ItemMgeForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
         {/* 버튼 별로 status_id에 따른 item들을 보이도록 함 */}
         <button
           onClick={() => {
-            setshowCondition(2);
+            setshowCondition(0);
             console.log(showCondition);
             setCurrentPage(1);
           }}
@@ -169,7 +126,7 @@ function ItemMgeForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
         </button>
         <button
           onClick={() => {
-            setshowCondition(0);
+            setshowCondition(1);
             console.log(showCondition);
             setCurrentPage(1);
           }}
@@ -179,7 +136,7 @@ function ItemMgeForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
         {/* 예약 가능한 물품 - 삭제인지 확인 가능한 것인지 */}
         <button
           onClick={() => {
-            setshowCondition(1);
+            setshowCondition(2);
             console.log(showCondition);
             setCurrentPage(1);
           }}
@@ -187,42 +144,87 @@ function ItemMgeForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
           물품 추가
         </button>
       </div>
-      <div className={styles.itemGrid}>
-        {currentItems.map((item) => (
-          <div key={item.item_id} className={styles.itemContainer}>
-            <Item
-              item_id={item.item_id}
-              item_img={item.item_img}
-              name={item.name}
-              category_id={item.category_id}
-              status_id={item.status_id}
-            />
-            <div className={styles.item_status}>
-              <ItemStatus status_id={item.status_id} />
-              {item.status_id === 0 && (
-                <button
-                  className={styles.btn}
-                  onClick={(event) => handleRent(event, item)}
-                >
-                  대여하기
-                </button>
-              )}
-              {item.status_id === 1 && (
-                <button
-                  className={styles.btn}
-                  onClick={(event) => handleReserve(event, item)}
-                >
-                  예약하기
-                </button>
-              )}
-              {item.status_id === 2 && (
-                <button className={styles.btn}>대여/예약불가</button>
-              )}
-            </div>
+      <>
+        {showCondition === 0 ? (
+          <div className={styles.itemGrid}>
+            {items.map((item) => (
+              <div key={item.category_name} className={styles.itemContainer}>
+                {/* <Item
+                  item_id={item.item_id}
+                  item_img={item.item_img}
+                  name={item.name}
+                  category_id={item.category_id}
+                  status_id={item.status_id}
+                /> */}
+                <Item
+                  category_name={item.category_name}
+                  item_img={img}
+                  numOfTotal={item.numOfTotal}
+                  numOfAvailable={item.numOfAvailable}
+                />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <div className={styles.pagination}>
+        ) : null}
+
+        {showCondition === 1 ? (
+          <div className={styles.itemGrid}>
+            {applyList.map((item) => (
+              <div key={item.category_name} className={styles.itemContainer}>
+                {/* <Item
+                  item_id={item.item_id}
+                  item_img={item.item_img}
+                  name={item.name}
+                  category_id={item.category_id}
+                  status_id={item.status_id}
+                /> */}
+                <Item
+                  category_name={item.category_name}
+                  item_img={img}
+                  numOfTotal={item.numOfTotal}
+                  numOfAvailable={item.numOfAvailable}
+                />
+              </div>
+            ))}
+          </div>
+        ) : null}
+
+        {showCondition === 2 ? (
+          <div className={styles.container2}>
+            {isSubmitted ? (
+              <div className={styles.notification}>
+                <p>물품 추가가 완료되었습니다. 감사합니다.</p>
+              </div>
+            ) : (
+              <form onSubmit={handleAddItem}>
+                <div className={styles.line}>
+                  <label className={styles.label}>물품명:</label>
+                  <input
+                    type="text"
+                    value={itemName}
+                    onChange={handleItemNameChange}
+                  />
+                </div>
+                <div className={styles.line}>
+                  <label className={styles.label}>수량:</label>
+                  <input
+                    type="text"
+                    value={number}
+                    onChange={handleNumberChange}
+                  />
+                </div>
+                <div className={styles.line}>
+                  <button type="submit" className={styles.btn2}>
+                    추가하기
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+        ) : null}
+      </>
+
+      {/* <div className={styles.pagination}>
         {currentPage > 1 && (
           <button
             onClick={() => handlePageChange(currentPage - 1)}
@@ -239,7 +241,7 @@ function ItemMgeForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
             다음 페이지
           </button>
         )}
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./Private.module.css";
 import Item from "./Item";
 import axios from "axios";
+import img from "../assets/spinner.gif";
 
 function Private({ isLoggedIn, changeLogInpage, loggedInUser }) {
   const [userInfo, setUserInfo] = useState(null);
@@ -196,12 +197,18 @@ function Private({ isLoggedIn, changeLogInpage, loggedInUser }) {
                 <ul className={styles.applyRecordsList}>
                   {rentalRecords.map((item, index) => (
                     <li key={index} className={styles.applyRecordItem}>
-                      <Item
+                      {/* <Item
                         item_id={item.item_id}
                         item_img={item.item_img}
                         name={item.name}
                         category_id={item.category_id}
                         status_id={item.status_id}
+                      /> */}
+                      <Item
+                        category_name={item.category_name}
+                        item_img={img}
+                        numOfTotal={item.numOfTotal}
+                        numOfAvailable={item.numOfAvailable}
                       />
                       <div>대여일자: {item.timestamp}</div>
                       <button onClick={() => handleExtendRental(index)}>
