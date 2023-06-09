@@ -24,6 +24,23 @@ function Private({ isLoggedIn, changeLogInpage, loggedInUser }) {
     }
   }, [isLoggedIn]);
 
+  // 사용자 정보 조회 API 호출
+  const fetchUserInfo = async () => {
+    try {
+      const response = await axios.get("/user/info");
+
+      if (response.status === 200) {
+        const userData = response.data;
+        setUserInfo(userData);
+        showUserInfo(true);
+      } else {
+        console.error(response.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   // 내 정보 확인하는 함수
   const showUserInfo = () => {
     setShowapplyRecord(false);
@@ -122,7 +139,7 @@ function Private({ isLoggedIn, changeLogInpage, loggedInUser }) {
     <>
       <div className={styles.container}>
         <div className={styles.menu}>
-          <button onClick={showUserInfo}>내 정보</button>
+          <button onClick={fetchUserInfo}>내 정보</button>
           {/* 대여 현황에서 연체 일 표시되도록 */}
           <button onClick={fetchRentalRecords}>대여 현황 조회</button>
           <button>분실신고 내역 조회</button>
@@ -139,6 +156,7 @@ function Private({ isLoggedIn, changeLogInpage, loggedInUser }) {
                 <div>이름: {userInfo.name}</div>
                 <div>전화번호: {userInfo.phoneNumber}</div>
                 <div>비밀번호: {userInfo.password}</div>
+                <div>학과: {userInfo.department}</div>
               </div>
             </div>
           ) : null}
