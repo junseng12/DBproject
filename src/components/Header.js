@@ -29,7 +29,8 @@ function Header() {
             alignItems: "center",
             justifyContent: "flex-start",
             textAlign: "center",
-            marginTop: "20px",
+            marginTop: "46px",
+            marginLeft: "44px",
             position: "absolute",
             left: 0,
             top: 0,
@@ -41,14 +42,38 @@ function Header() {
 
         <div
           style={{
-            flex: "1",
-            display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            border: "1px solid rgba(81, 165, 212, 0.7)",
+            // border: "1px solid #51A5D4",
+            boxShadow: "0px 0px 5px 2px rgba(81, 165, 212, 0.7)",
+
+            width: "194px",
+            height: "97px",
+            boxSizing: "border-box",
+            background: "#FFFFFF",
+            boxShadow: "6px 6px 5px 0px rgba(81, 165, 212, 0.7)",
+            borderRadius: "25px",
+            margin: "70px",
           }}
         >
-          <img
-            src={AjouRental}
+          <div
+            style={{
+              fontFamily: "Gmarket Sans TTF",
+              fontStyle: "normal",
+              fontWeight: 300,
+              fontSize: "36px",
+              lineHeight: "41px",
+              textAlign: "center",
+              color: "#000000",
+              margin: "8px",
+            }}
+          >
+            Ajou Rental
+          </div>
+          <div />
+
+          <div
             style={{
               margin: "10px",
             }}

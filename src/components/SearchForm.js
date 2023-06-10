@@ -14,7 +14,7 @@ function SearchForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
   //페이지 당 표현될 수 있는 최대 item 수
   const itemsPerPage = 6;
   //물품 조회 종류(전체, 대여가능, 예약 가능)에 따른 filtering 조건
-  const [showCondition, setshowCondition] = useState(0);
+  const [showCondition, setShowCondition] = useState(0);
 
   // //사용자 정보 넣어놓기
   // const userInfo = loggedInUser;
@@ -29,6 +29,7 @@ function SearchForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
       //대여 가능한 물품 조회
     } else if (showCondition === 1) {
       fetchAvailableRentalItems();
+      //예약 가능한 물품 조회
     } else if (showCondition === 2) {
       fetchAvailableReserveItems();
     }
@@ -92,6 +93,38 @@ function SearchForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
     } catch (error) {
       console.log(error);
     }
+    setItems([
+      {
+        category_name: "마우스",
+        numOfTotal: 5,
+        numOfAvailable: 5,
+      },
+      {
+        category_name: "충전기",
+        numOfTotal: 7,
+        numOfAvailable: 5,
+      },
+      {
+        category_name: "우산",
+        numOfTotal: 8,
+        numOfAvailable: 6,
+      },
+      {
+        category_name: "보조배터리",
+        numOfTotal: 7,
+        numOfAvailable: 6,
+      },
+      {
+        category_name: "공학용 계산기",
+        numOfTotal: 7,
+        numOfAvailable: 6,
+      },
+      {
+        category_name: "머리끈",
+        numOfTotal: 3,
+        numOfAvailable: 2,
+      },
+    ]);
   };
 
   // 예약 가능한 물품 조회 API 호출 함수
@@ -103,6 +136,13 @@ function SearchForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
     } catch (error) {
       console.log(error);
     }
+    setItems([
+      {
+        category_name: "보드게임",
+        numOfTotal: 4,
+        numOfAvailable: 0,
+      },
+    ]);
   };
 
   const handlePageChange = (pageNumber) => {
@@ -194,95 +234,103 @@ function SearchForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.menu}>
+    <>
+      <div className={styles.sidebar}>
         {/* 버튼 별로 status_id에 따른 item들을 보이도록 함 */}
         <button
+          className={showCondition === 0 ? styles.active : ""}
           onClick={() => {
-            setshowCondition(0);
-            console.log(showCondition);
+            setShowCondition(0);
+            // console.log(showCondition);
             setCurrentPage(1);
           }}
         >
           전체
         </button>
         <button
+          className={showCondition === 1 ? styles.active : ""}
           onClick={() => {
-            setshowCondition(1);
-            console.log(showCondition);
+            setShowCondition(1);
+            // console.log(showCondition);
             setCurrentPage(1);
           }}
         >
           대여 가능한 물품
         </button>
-        {/* 예약 가능한 물품 - 삭제인지 확인 가능한 것인지 */}
+        {/* 물품 추가 */}
         <button
+          className={showCondition === 2 ? styles.active : ""}
           onClick={() => {
-            setshowCondition(2);
-            console.log(showCondition);
+            setShowCondition(2);
+            // console.log(showCondition);
             setCurrentPage(1);
           }}
         >
           예약 가능한 물품
         </button>
       </div>
-      <div className={styles.itemGrid}>
-        {currentItems.map((item) => (
-          <div key={item.category_name} className={styles.itemContainer}>
-            {/* <Item
+      <></>
+      <>
+        <div className={styles.container} style={{ height: "auto" }}>
+          <div className={styles.itemGrid}>
+            {currentItems.map((item) => (
+              <div key={item.category_name} className={styles.itemContainer}>
+                {/* <Item
               category_name={item.item_id}
               item_img={item.item_img}
               name={item.name}
               category_id={item.category_id}
               status_id={item.status_id}
             /> */}
-            <Item
-              category_name={item.category_name}
-              item_img={img}
-              numOfTotal={item.numOfTotal}
-              numOfAvailable={item.numOfAvailable}
-            />
-            <div className={styles.item_status}>
-              <ItemStatus numOfAvailable={item.numOfAvailable} />
-              {item.numOfAvailable > 0 && (
-                <button
-                  className={styles.btn}
-                  onClick={(event) => handleRent(event, item)}
-                >
-                  대여하기
-                </button>
-              )}
-              {item.numOfAvailable === 0 && (
-                <button
-                  className={styles.btn}
-                  onClick={(event) => handleReserve(event, item)}
-                >
-                  예약하기
-                </button>
-              )}
-            </div>
+                <Item
+                  category_name={item.category_name}
+                  item_img={img}
+                  numOfTotal={item.numOfTotal}
+                  numOfAvailable={item.numOfAvailable}
+                />
+                <div className={styles.item_status}>
+                  <ItemStatus numOfAvailable={item.numOfAvailable} />
+                  {item.numOfAvailable > 0 && (
+                    <button
+                      className={styles.btn}
+                      onClick={(event) => handleRent(event, item)}
+                    >
+                      대여하기
+                    </button>
+                  )}
+                  {item.numOfAvailable === 0 && (
+                    <button
+                      className={styles.btn}
+                      onClick={(event) => handleReserve(event, item)}
+                    >
+                      예약하기
+                    </button>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <div className={styles.pagination}>
-        {currentPage > 1 && (
-          <button
-            onClick={() => handlePageChange(currentPage - 1)}
-            className={styles.btn}
-          >
-            이전 페이지
-          </button>
-        )}
-        {currentPage < totalPages && (
-          <button
-            onClick={() => handlePageChange(currentPage + 1)}
-            className={styles.btn}
-          >
-            다음 페이지
-          </button>
-        )}
-      </div>
-    </div>
+          <div className={styles.pagination}>
+            {currentPage > 1 && (
+              <button
+                onClick={() => handlePageChange(currentPage - 1)}
+                className={styles.btn}
+              >
+                이전 페이지
+              </button>
+            )}
+            {currentPage < totalPages && (
+              <button
+                onClick={() => handlePageChange(currentPage + 1)}
+                className={styles.btn}
+              >
+                다음 페이지
+              </button>
+            )}
+          </div>
+        </div>
+      </>
+    </>
   );
 }
 

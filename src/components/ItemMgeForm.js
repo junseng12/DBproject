@@ -13,7 +13,7 @@ function ItemMgeForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
   const [currentPage, setCurrentPage] = useState(1);
 
   // //페이지 당 표현될 수 있는 최대 item 수
-  const itemsPerPage = 10;
+  const itemsPerPage = 9;
   //물품 조회 종류(전체, 대여가능, 예약 가능)에 따른 filtering 조건
   const [showCondition, setshowCondition] = useState(0);
   const [applyList, setApplyList] = useState([]);
@@ -307,103 +307,110 @@ function ItemMgeForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.menu}>
+    <>
+      <div className={styles.sidebar}>
         {/* 버튼 별로 status_id에 따른 item들을 보이도록 함 */}
         <button
+          className={showCondition === 0 ? styles.active : ""}
           onClick={() => {
             setshowCondition(0);
             console.log(showCondition);
             setCurrentPage(1);
           }}
         >
-          물품 조회
+          물품조회
         </button>
         <button
+          className={showCondition === 1 ? styles.active : ""}
           onClick={() => {
             setshowCondition(1);
             console.log(showCondition);
             setCurrentPage(1);
           }}
         >
-          신청 내역
+          신청내역
         </button>
-        {/* 예약 가능한 물품 - 삭제인지 확인 가능한 것인지 */}
+        {/* 물품 추가 */}
         <button
+          className={showCondition === 2 ? styles.active : ""}
           onClick={() => {
             setshowCondition(2);
             console.log(showCondition);
             setCurrentPage(1);
           }}
         >
-          물품 추가
+          물품추가
         </button>
       </div>
-      {/* 물품 조회 */}
-      <>
-        {showCondition === 0 ? (
-          <div>
-            {/* <Item
+      <></>
+      <div className={styles.container}>
+        {/* 물품 조회 */}
+        <>
+          {showCondition === 0 ? (
+            <div>
+              {/* <Item
                   item_id={item.item_id}
                   item_img={item.item_img}
                   name={item.name}
                   category_id={item.category_id}
                   status_id={item.status_id}
                 /> */}
-            {currentItems.map((item) => (
-              <div key={item.item_id} className={styles.itemContainer2}>
-                <div className={styles.applyitem}>
-                  물품아이디 : {item.item_id} 물품명 : {item.category_name}{" "}
-                  수량:
+              {currentItems.map((item) => (
+                <div key={item.item_id} className={styles.itemContainer2}>
+                  <div className={styles.applyitem}>
+                    물품아이디 : {item.item_id} 물품명 : {item.category_name}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        ) : null}
-        {/* 신청 내역  조회 */}
-        {showCondition === 1 ? (
-          <div>
-            {applyList.map((item) => (
-              <div key={item.apply_id} className={styles.itemContainer2}>
-                <div className={styles.applyitem}>
-                  물품명 : {item.apply_name} 신청사유 : {item.reason}
+              ))}
+            </div>
+          ) : null}
+        </>
+        <>
+          {/* 신청 내역  조회 */}
+          {showCondition === 1 ? (
+            <div>
+              {applyList.map((item) => (
+                <div key={item.apply_id} className={styles.itemContainer2}>
+                  <div className={styles.applyitem}>
+                    물품명 : {item.apply_name} 신청사유 : {item.reason}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        ) : null}
-        {/* 물품 추가 */}
-        {showCondition === 2 ? (
-          <div className={styles.container2}>
-            <form onSubmit={handleAddItem}>
-              <div className={styles.line}>
-                <label className={styles.label}>물품명:</label>
-                <input
-                  type="text"
-                  value={itemName}
-                  onChange={handleItemNameChange}
-                />
-              </div>
-              <div className={styles.line}>
-                <label className={styles.label}>수량:</label>
-                <input
-                  type="text"
-                  value={number}
-                  onChange={handleNumberChange}
-                />
-              </div>
-              <div className={styles.line}>
-                <button type="submit" className={styles.btn2}>
-                  추가하기
-                </button>
-              </div>
-            </form>
-          </div>
-        ) : null}
-      </>
+              ))}
+            </div>
+          ) : null}
+        </>
+        <>
+          {/* 물품 추가 */}
+          {showCondition === 2 ? (
+            <div className={styles.container2}>
+              <form onSubmit={handleAddItem}>
+                <div className={styles.line}>
+                  <label className={styles.label}>물품명:</label>
+                  <input
+                    type="text"
+                    value={itemName}
+                    onChange={handleItemNameChange}
+                  />
+                </div>
+                <div className={styles.line}>
+                  <label className={styles.label}>수량:</label>
+                  <input
+                    type="text"
+                    value={number}
+                    onChange={handleNumberChange}
+                  />
+                </div>
+                <div className={styles.line}>
+                  <button type="submit" className={styles.btn2}>
+                    추가하기
+                  </button>
+                </div>
+              </form>
+            </div>
+          ) : null}
+        </>
 
-      <>
-        {showCondition != 2 ? (
+        {showCondition !== 2 ? (
           <div className={styles.pagination}>
             {currentPage > 1 && (
               <button
@@ -423,8 +430,8 @@ function ItemMgeForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
             )}
           </div>
         ) : null}
-      </>
-    </div>
+      </div>
+    </>
   );
 }
 

@@ -41,33 +41,36 @@
 
 .container {
   width: 1163px;
-  height: auto;
+  /* height: auto; */
+  height: 535px;
   /* left: 184px;
   top: 306px; */
   border: 3px solid #bcbcbc;
-  border-radius: 10px;
+  border-radius: 15px;
   /**/
   position: relative;
   padding-bottom: 40px;
   background: #ffffff;
+  margin: 50px;
+  justify-content: center;
 }
 
-.menu {
-  box-sizing: border-box;
-
-  width: auto;
-  height: 46px;
-
+.sidebar {
   background: #ffffff;
-  border: 0.5px solid #c2c2c2;
-
+  border: 1px solid #d1d1d1;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  box-sizing: border-box;
   display: flex;
-  justify-content: space-around;
-
-  gap: 20px;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 16px;
+  width: 160px;
+  height: 357px;
+  margin-left: -200px;
 }
 
-.menu button {
+.sidebar button {
   border: none;
   background: none;
   padding: 0;
@@ -148,7 +151,7 @@
 
 .container2 {
   margin: auto;
-  margin-top: 50px;
+  margin-top: 150px;
   margin-bottom: 50px;
   width: 310px;
   height: 130px;
@@ -250,4 +253,11 @@
   line-height: 17px;
 
   color: #ff0000;
+}
+
+.sidebar button:hover {
+  /* hover 효과 */
+  text-decoration: underline;
+  text-decoration-color: #5ab3e5;
+  text-decoration-thickness: 5px;
 }

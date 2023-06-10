@@ -4,7 +4,7 @@
   height: 130px;
 
   border: 3px solid #bcbcbc;
-  border-radius: 5px;
+  border-radius: 15px;
   padding: 20px;
 }
 
@@ -31,6 +31,14 @@
   box-sizing: border-box;
   align-self: flex-end;
   justify-content: center;
+
+  font-family: "Gmarket Sans TTF";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 18px;
+
+  color: #000000;
 }
 
 .btn {

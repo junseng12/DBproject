@@ -112,7 +112,7 @@ const LoginForm = ({ handleLogin, saveLoginInfo }) => {
             <form onSubmit={handleSubmit} className={styles.container}>
               <div className={styles.line}>
                 <label htmlFor="studentId" className={styles.label}>
-                  학번:
+                  학번
                 </label>
                 <input
                   className={styles.input}
@@ -124,7 +124,7 @@ const LoginForm = ({ handleLogin, saveLoginInfo }) => {
               </div>
               <div className={styles.line}>
                 <label htmlFor="password" className={styles.label}>
-                  비밀번호:
+                  비밀번호
                 </label>
                 <input
                   className={styles.input}

@@ -170,117 +170,125 @@ function RentMgeForm({ isLoggedIn, changeLogInpage }) {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.menu}>
+    <>
+      <div className={styles.sidebar}>
         {/* 버튼 별로 status_id에 따른 item들을 보이도록 함 */}
         <button
+          className={showCondition === 0 ? styles.active : ""}
           onClick={() => {
             setshowCondition(0);
             console.log(showCondition);
             setCurrentPage(1);
           }}
         >
-          대여 현황
+          대여현황
         </button>
         <button
+          className={showCondition === 1 ? styles.active : ""}
           onClick={() => {
             setshowCondition(1);
             console.log(showCondition);
             setCurrentPage(1);
           }}
         >
-          연체 내역
+          연체내역
         </button>
         {/* 예약 가능한 물품 - 삭제인지 확인 가능한 것인지 */}
         <button
+          className={showCondition === 2 ? styles.active : ""}
           onClick={() => {
             setshowCondition(2);
             console.log(showCondition);
             setCurrentPage(1);
           }}
         >
-          신고 내역
+          신고내역
         </button>
       </div>
-      {/* 대여 현황*/}
-      <>
-        {showCondition === 0 ? (
-          <div>
-            {/* <Item
-                  item_id={item.item_id}
-                  item_img={item.item_img}
-                  name={item.name}
-                  category_id={item.category_id}
-                  status_id={item.status_id}
-                /> */}
-            {currentItems.map((item) => (
-              <div key={item.item_id} className={styles.itemContainer2}>
-                <div className={styles.applyitem}>
-                  물품아이디 : {item.item_id}
-                </div>
-                <div> 대여자 : {item.student_id}</div>
+      <></>
+      <div className={styles.container}>
+        <div>
+          {/* 대여 현황*/}
+          <>
+            {showCondition === 0 ? (
+              <div>
+                {/* <Item
+                item_id={item.item_id}
+                item_img={item.item_img}
+                name={item.name}
+                category_id={item.category_id}
+                status_id={item.status_id}
+              /> */}
+                {currentItems.map((item) => (
+                  <div key={item.item_id} className={styles.itemContainer2}>
+                    <div className={styles.applyitem}>
+                      물품아이디 : {item.item_id}
+                    </div>
+                    <div> 대여자 : {item.student_id}</div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        ) : null}
-      </>
-      {/* 연체내역 */}
-      {/* "item_id": 13,
-        "category_name": "우산",
-        "student_id": "202326910",
-        "start_date": "2023-05-31",
-        "end_date": "2023-06-07" */}
-      <>
-        {showCondition === 1 ? (
-          <div className={styles.itemGrid}>
-            {expiredItems.map((item) => (
-              <div key={item.item_id} className={styles.itemContainer}>
-                {/* item 코드인데, 내부 설정 변경하기 위해 그냥 씀 */}
-                <div>
-                  <img src={img} alt={img} className={styles.item_img} />
-                  <div>
-                    <div className={styles.item_name}>
-                      <div className={styles.category_name}>
-                        {item.category_name}
+            ) : null}
+          </>
+          {/* 연체내역 */}
+          {/* "item_id": 13,
+    "category_name": "우산",
+    "student_id": "202326910",
+    "start_date": "2023-05-31",
+    "end_date": "2023-06-07" */}
+          <>
+            {showCondition === 1 ? (
+              <div className={styles.itemGrid}>
+                {expiredItems.map((item) => (
+                  <div key={item.item_id} className={styles.itemContainer}>
+                    {/* item 코드인데, 내부 설정 변경하기 위해 그냥 씀 */}
+                    <div>
+                      <img src={img} alt={img} className={styles.item_img} />
+                      <div>
+                        <div className={styles.item_name}>
+                          <div className={styles.category_name}>
+                            {item.category_name}
+                          </div>
+                          <div>예상반납기간: {item.end_date}</div>
+                          <div className={styles.expireditem}>
+                            {item.item_id} 일 째 연체 중
+                          </div>
+                          {/* <div>${category_id}</div> */}
+                        </div>
                       </div>
-                      <div>예상반납기간: {item.end_date}</div>
-                      <div className={styles.expireditem}>
-                        {item.item_id} 일 째 연체 중
-                      </div>
-                      {/* <div>${category_id}</div> */}
                     </div>
                   </div>
-                </div>
+                ))}
               </div>
-            ))}
+            ) : null}
+          </>
+          {/* 신고내역 */}
+          <>
+            {showCondition === 2 ? (
+              <div className={styles.itemGrid}>신고 내역이 있습니다.</div>
+            ) : null}
+          </>
+          <div className={styles.pagination}>
+            {currentPage > 1 && (
+              <button
+                onClick={() => handlePageChange(currentPage - 1)}
+                className={styles.btn}
+              >
+                이전 페이지
+              </button>
+            )}
+            {currentPage < totalPages && (
+              <button
+                onClick={() => handlePageChange(currentPage + 1)}
+                className={styles.btn}
+              >
+                다음 페이지
+              </button>
+            )}
           </div>
-        ) : null}
-      </>
-      {/* 신고내역 */}
-      <>
-        {showCondition === 2 ? (
-          <div className={styles.itemGrid}>신고 내역이 있습니다.</div>
-        ) : null}
-      </>
-      <div className={styles.pagination}>
-        {currentPage > 1 && (
-          <button
-            onClick={() => handlePageChange(currentPage - 1)}
-            className={styles.btn}
-          >
-            이전 페이지
-          </button>
-        )}
-        {currentPage < totalPages && (
-          <button
-            onClick={() => handlePageChange(currentPage + 1)}
-            className={styles.btn}
-          >
-            다음 페이지
-          </button>
-        )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
