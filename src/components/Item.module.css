@@ -9,7 +9,17 @@
   margin-bottom: 10px;
 }
 
-.item_name a {
+.category_name {
+  font-family: "Gmarket Sans TTF";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 17px;
+
+  color: #000000;
+}
+
+.item_name div {
   text-decoration: none;
   color: #333;
 }
@@ -29,4 +39,14 @@
 .btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.expireditem {
+  font-family: "Gmarket Sans TTF";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 17px;
+
+  color: #ff0000;
 }

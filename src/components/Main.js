@@ -11,6 +11,8 @@ import Search from "../components/SearchForm";
 import Login from "../components/LoginForm";
 import Apply from "../components/ApplyForm";
 import Menu from "../components/Menu";
+import RentMgeForm from "./RentMgeForm";
+import ItemMgeForm from "./ItemMgeForm";
 
 function Main() {
   const [currentPage, setCurrentPage] = useState("Home");
@@ -42,7 +44,7 @@ function Main() {
   return (
     <div className={styles.container}>
       <Menu
-        isLoggedIn={!!loggedInUser}
+        isLoggedIn={isLoggedIn}
         handleButtonClick={handleButtonClick}
         setIsLoggedIn={setIsLoggedIn}
         isAdmin={isAdmin}
@@ -90,7 +92,7 @@ function Main() {
 
           {/* 관리자 관련 Page */}
           {currentPage === "RentMge" && (
-            <Apply
+            <RentMgeForm
               isLoggedIn={isLoggedIn}
               changeLogInpage={handleButtonClick}
               loggedInUser={loggedInUser}
@@ -98,7 +100,7 @@ function Main() {
           )}
 
           {currentPage === "ItemMge" && (
-            <Private
+            <ItemMgeForm
               isLoggedIn={isLoggedIn}
               changeLogInpage={handleButtonClick}
               loggedInUser={loggedInUser}

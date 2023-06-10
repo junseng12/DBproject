@@ -24,9 +24,9 @@ function Item({ category_name, item_img, numOfTotal, numOfAvailable }) {
       <img src={item_img} alt={item_img} className={styles.item_img} />
       <div>
         <div className={styles.item_name}>
-          <div>{category_name}</div>
+          <div className={styles.category_name}>{category_name}</div>
           <div>
-            {numOfAvailable} / {numOfTotal}
+            대여 가능: {numOfAvailable} / 전체 물품: {numOfTotal}
           </div>
           {/* <div>${category_id}</div> */}
         </div>

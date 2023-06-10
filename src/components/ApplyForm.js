@@ -7,8 +7,9 @@ function ApplyForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
   const [reason, setReason] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   //사용자 정보 연동
-  const userInfo = loggedInUser;
-  const { student_id } = userInfo;
+  const student_id = "202021062";
+  // const userInfo = loggedInUser;
+  // const { student_id } = userInfo;
 
   const handleItemNameChange = (event) => {
     setItemName(event.target.value);

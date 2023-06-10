@@ -7,8 +7,8 @@ const LoginForm = ({ handleLogin, saveLoginInfo }) => {
   const [student_id, setStudent_id] = useState("");
   const [password, setPassword] = useState("");
   const [register, setRegister] = useState(false);
-  // 로그인 관련 에러 발생 시 창 뜨도록 함
-  const [loginError, setLoginError] = useState(false);
+  // // 로그인 관련 에러 발생 시 창 뜨도록 함
+  // const [loginError, setLoginError] = useState(false);
   //로그인 여부 확인하는 변수
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -45,7 +45,7 @@ const LoginForm = ({ handleLogin, saveLoginInfo }) => {
         // 로그인 성공
         console.log("로그인이 완료되었습니다.");
         setIsLoggedIn(true);
-        setLoginError(false);
+        // setLoginError(false);
         handleLogin();
         saveLoginInfo(response.data);
         console.log(response.data);
@@ -53,15 +53,17 @@ const LoginForm = ({ handleLogin, saveLoginInfo }) => {
         // 로그인 실패
         if (response.errorCode === "INVALID_PASSWORD") {
           console.log(response.errorMessage);
+          alert("비밀번호가 일치하지 않습니다.");
         } else {
           console.log(response.errorMessage);
+          alert("등록되지 않은 학번 입니다.");
         }
-        setLoginError(true);
+        // setLoginError(true);
       }
     } catch (error) {
       // 오류 처리
       console.log(event);
-      setLoginError(true);
+      // setLoginError(true);
     }
   }
 
@@ -86,13 +88,12 @@ const LoginForm = ({ handleLogin, saveLoginInfo }) => {
         break;
       }
     }
-
+    matchFound = true;
     if (matchFound) {
       setIsLoggedIn(true);
-      setLoginError(false);
       handleLogin();
     } else {
-      setLoginError(true);
+      alert("유효하지 않은 학번 또는 비밀번호입니다.");
     }
   };
 
@@ -107,15 +108,8 @@ const LoginForm = ({ handleLogin, saveLoginInfo }) => {
         <Registeration handleRegister={handleRegister} />
       ) : (
         <>
-          {isLoggedIn ? (
-            <div>{/* 로그인 후에 표시할 내용 */}</div>
-          ) : (
+          {isLoggedIn ? null : (
             <form onSubmit={handleSubmit} className={styles.container}>
-              {loginError && (
-                <div className={styles.error}>
-                  유효하지 않은 학번 또는 비밀번호입니다.
-                </div>
-              )}
               <div className={styles.line}>
                 <label htmlFor="studentId" className={styles.label}>
                   학번:
