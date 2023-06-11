@@ -15,7 +15,7 @@ function ItemMgeForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
   // //페이지 당 표현될 수 있는 최대 item 수
   const itemsPerPage = 9;
   //물품 조회 종류(전체, 대여가능, 예약 가능)에 따른 filtering 조건
-  const [showCondition, setshowCondition] = useState(0);
+  const [showCondition, setShowCondition] = useState(0);
   const [applyList, setApplyList] = useState([]);
 
   // //사용자 정보 넣어놓기
@@ -32,6 +32,7 @@ function ItemMgeForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
   };
 
   //물품 조회 API
+  //물품 삭제 API
   //신청 내역 조회 API
   //물품 추가 조회 API
 
@@ -267,6 +268,17 @@ function ItemMgeForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
     console.log(applyList);
   };
 
+  // 물품 삭제 API 호출 함수
+  const deleteItem = async (item) => {
+    try {
+      const response = await axios.delete(`/item/delete/${item.item_id}`);
+      console.log(response.data);
+      // 물품 삭제 성공 시 다른 동작을 수행할 수 있습니다.
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -313,7 +325,7 @@ function ItemMgeForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
         <button
           className={showCondition === 0 ? styles.active : ""}
           onClick={() => {
-            setshowCondition(0);
+            setShowCondition(0);
             console.log(showCondition);
             setCurrentPage(1);
           }}
@@ -323,7 +335,7 @@ function ItemMgeForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
         <button
           className={showCondition === 1 ? styles.active : ""}
           onClick={() => {
-            setshowCondition(1);
+            setShowCondition(1);
             console.log(showCondition);
             setCurrentPage(1);
           }}
@@ -334,7 +346,7 @@ function ItemMgeForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
         <button
           className={showCondition === 2 ? styles.active : ""}
           onClick={() => {
-            setshowCondition(2);
+            setShowCondition(2);
             console.log(showCondition);
             setCurrentPage(1);
           }}
@@ -360,6 +372,12 @@ function ItemMgeForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
                   <div className={styles.applyitem}>
                     물품아이디 : {item.item_id} 물품명 : {item.category_name}
                   </div>
+                  <button
+                    onClick={() => deleteItem(item)}
+                    style={{ float: "left" }}
+                  >
+                    물품삭제
+                  </button>
                 </div>
               ))}
             </div>

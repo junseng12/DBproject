@@ -47,7 +47,7 @@ function Main() {
         isLoggedIn={isLoggedIn}
         handleButtonClick={handleButtonClick}
         setIsLoggedIn={setIsLoggedIn}
-        isAdmin={!isAdmin}
+        isAdmin={isAdmin}
       />
 
       <div

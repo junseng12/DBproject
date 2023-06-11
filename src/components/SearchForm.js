@@ -155,7 +155,7 @@ function SearchForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
   const currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(items.length / itemsPerPage);
 
-  //Item을 예약하는 로직
+  //Item을 대여하는 로직
   async function handleRent(event, item) {
     const confirmation = window.confirm("물품 대여를 진행하시겠습니까?");
 

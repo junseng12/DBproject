@@ -163,6 +163,29 @@ function RentMgeForm({ isLoggedIn, changeLogInpage }) {
   //   }
   // }
 
+  //반납 승인 API
+  const handleReturn = async (item) => {
+    const confirmation = window.confirm("반납을 승인하시겠습니까?");
+
+    if (confirmation) {
+      try {
+        const response = await axios.get(`/rent/return/${item.item_id}`);
+
+        if (response.status === 200) {
+          // 반납 승인 성공
+          console.log(response.data.msg);
+          // 반납 승인 후 대여 현황 다시 불러오기
+          fetchRentItems();
+        } else {
+          // 반납 승인 실패
+          console.log("반납 승인에 실패했습니다.");
+        }
+      } catch (error) {
+        console.error("반납 승인 과정에서 오류가 발생했습니다.", error);
+      }
+    }
+  };
+
   if (!isLoggedIn) {
     alert("로그인이 필요한 서비스입니다.");
     changeLogInpage("Login"); // 로그인 페이지로 전환
@@ -225,6 +248,12 @@ function RentMgeForm({ isLoggedIn, changeLogInpage }) {
                       물품아이디 : {item.item_id}
                     </div>
                     <div> 대여자 : {item.student_id}</div>
+                    <button
+                      onClick={() => handleReturn(item)}
+                      style={{ float: "left" }}
+                    >
+                      반납승인
+                    </button>
                   </div>
                 ))}
               </div>

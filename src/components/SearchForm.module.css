@@ -63,7 +63,8 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+
   padding: 16px;
   width: 160px;
   height: 357px;
@@ -84,7 +85,7 @@
   font-size: 20px;
   line-height: 23px;
   /* identical to box height */
-
+  margin: 12px;
   color: #000000;
 }
 

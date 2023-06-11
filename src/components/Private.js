@@ -14,6 +14,9 @@ function Private({ isLoggedIn, changeLogInpage, loggedInUser }) {
   const [rentalRecords, setRentalRecords] = useState([]);
   const [showCondition, setShowCondition] = useState(false); // 새로운 변수 추가
 
+  //사용자 예약 내역 저장하는 변수
+  const [reserveData, setReserveData] = useState([]);
+
   useEffect(() => {
     // 로그인 상태가 변경될 때마다 사용자 정보를 가져오는 로직 작성
     if (isLoggedIn) {
@@ -21,6 +24,7 @@ function Private({ isLoggedIn, changeLogInpage, loggedInUser }) {
       // const user = loggedInUser;
       // setUserInfo(user);
       // console.log(user);
+      fetchUserInfo();
       console.log(isLoggedIn);
     } else {
       setUserInfo(null); // 로그아웃한 경우 사용자 정보 초기화
@@ -35,12 +39,14 @@ function Private({ isLoggedIn, changeLogInpage, loggedInUser }) {
   useEffect(() => {
     // 내 정보 확인하는 함수
     if (showCondition === 0) {
-      fetchUserInfo();
+      // fetchUserInfo();
+      console.log(userInfo);
       // 대여 조회 API 함수
     } else if (showCondition === 1) {
       fetchRentalRecords();
       // 예약 조회 API 함수 - 이거 찾아봐야 함
     } else if (showCondition === 2) {
+      fetchReserveRecords();
       console.log(showCondition);
     }
   }, [showCondition]);
@@ -71,32 +77,6 @@ function Private({ isLoggedIn, changeLogInpage, loggedInUser }) {
     });
     console.log(userInfo);
   };
-
-  // // 내 정보 확인하는 함수
-  // const showUserInfo = () => {
-  //   setShowapplyRecord(false);
-  //   setShowRentalRecords(false);
-  //   setShowInfo(true);
-  // };
-
-  // // 사용자 물품 신청 내역 확인하는 함수
-  // const handleApplyRecordsClick = () => {
-  //   const savedApplyRecords =
-  //     JSON.parse(localStorage.getItem("applyRecords")) || [];
-  //   setApplyRecords(savedApplyRecords);
-  //   setShowInfo(false);
-  //   setShowRentalRecords(false);
-  //   setShowapplyRecord(true);
-  // };
-  // // 사용자 대여 물품 내역 확인하는 함수
-  // const handleRentalRecordsClick = () => {
-  //   const savedRentalRecords =
-  //     JSON.parse(localStorage.getItem("rentalRecords")) || [];
-  //   setRentalRecords(savedRentalRecords);
-  //   setShowInfo(false);
-  //   setShowapplyRecord(false);
-  //   setShowRentalRecords(true);
-  // };
 
   // 대여 조회 API 함수
   const fetchRentalRecords = async () => {
@@ -138,24 +118,58 @@ function Private({ isLoggedIn, changeLogInpage, loggedInUser }) {
 
   //대여 연장 API 함수
   const handleExtendRental = async (index) => {
+    const confirmation = window.confirm("해당 물품 대여를 연장하시겠습니까?");
+
+    if (confirmation) {
+      try {
+        const item = rentalRecords[index];
+        const itemId = item.item_id;
+        const response = await axios.get(`/rent/extend/${itemId}`);
+
+        if (response.status === 200) {
+          // 연장 성공
+          // 세부 변경 필요
+          const updatedRentalRecords = [...rentalRecords];
+          updatedRentalRecords[index] = response.data.updatedItem;
+          //어디에 변경?
+          alert(response.data.msg);
+        } else {
+          alert(response.data.errorMessage);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    // {
+    //   "msg": "대여 연장이 완료되었습니다.",
+    //   "status": 200
+    // }
+  };
+
+  //예약 조회 API 함수
+  const fetchReserveRecords = async () => {
     try {
-      const item = rentalRecords[index];
-      const itemId = item.item_id;
-      const response = await axios.get(`/rent/extend/${itemId}`);
+      const response = await axios.get("/reserve/mylist");
 
       if (response.status === 200) {
-        // 연장 성공
-        // 세부 변경 필요
-        const updatedRentalRecords = [...rentalRecords];
-        updatedRentalRecords[index] = response.data.updatedItem;
-        //어디에 변경?
-        // setRentalRecords(updatedRentalRecords);
+        setReserveData(response.data);
       } else {
+        // 예약 조회 API 요청이 실패한 경우
         console.error(response.data);
+        console.error(response.data.errorMessage);
       }
     } catch (error) {
       console.error(error);
     }
+
+    setReserveData([
+      {
+        reserve_id: 1,
+        category_name: "보드게임",
+      },
+    ]);
+    // 예약 목록 데이터를 처리하는 로직을 추가하세요
   };
 
   if (!isLoggedIn) {
@@ -222,63 +236,70 @@ function Private({ isLoggedIn, changeLogInpage, loggedInUser }) {
               </div>
             ) : null}
           </>
-
-          {/* <>
-          {showapplyRecord ? (
-            <div className={styles.applyRecordsContainer}>
-              <h2>물품 신청 내역</h2>
-              {applyRecords.length > 0 ? (
-                <ul className={styles.applyRecordsList}>
-                  {applyRecords.map((record, index) => (
-                    <li key={index} className={styles.applyRecordItem}>
-                      <div className={styles.applyRecordInfo}>
-                        <div>물품명: {record.itemName}</div>
-                        <div>신청사유: {record.reason}</div>
-                        <div>신청일자: {record.submissionDate}</div>
-                      </div>
-                      <button onClick={() => handleCancelApply(index)}>
-                        신청 취소하기
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p>물품 신청 내역이 없습니다.</p>
-              )}
-            </div>
-          ) : null}
-        </> */}
           <>
             {showCondition === 1 ? (
-              <div className={styles.itemContainer}>
-                <h2>대여 현황</h2>
+              <div className={styles.itemGrid}>
                 {rentalRecords.length > 0 ? (
                   <ul className={styles.applyRecordsList}>
                     {rentalRecords.map((item, index) => (
                       <li key={index} className={styles.applyRecordItem}>
-                        {/* <Item
-                        item_id={item.item_id}
-                        item_img={item.item_img}
-                        name={item.name}
-                        category_id={item.category_id}
-                        status_id={item.status_id}
-                      /> */}
-                        <Item
-                          category_name={item.category_name}
-                          item_img={img}
-                          numOfTotal={item.numOfTotal}
-                          numOfAvailable={item.numOfAvailable}
-                        />
-                        <div>대여일자: {item.start_date}</div>
-                        <button onClick={() => handleExtendRental(index)}>
-                          연장하기
-                        </button>
+                        {/* item 코드인데, 내부 설정 변경하기 위해 그냥 씀 */}
+                        <div>
+                          <img
+                            src={img}
+                            alt={img}
+                            className={styles.item_img}
+                          />
+                          <div>
+                            <div className={styles.item_name}>
+                              <div className={styles.category_name}>
+                                {item.category_name}
+                              </div>
+
+                              <div>대여일자: {item.start_date}</div>
+                              <button onClick={() => handleExtendRental(index)}>
+                                연장하기
+                              </button>
+                            </div>
+                          </div>
+                        </div>
                       </li>
                     ))}
                   </ul>
                 ) : (
                   <p>대여 현황이 없습니다.</p>
                 )}
+              </div>
+            ) : null}
+          </>
+
+          {/* [
+                  {
+                    "reserve_id": 1,
+                    "category_name": "보드게임"
+                }
+            ] */}
+          {/* 예약내역 */}
+          <>
+            {showCondition === 2 ? (
+              <div className={styles.itemGrid}>
+                {reserveData.map((item) => (
+                  <div key={item.reserve_id} className={styles.itemContainer2}>
+                    {/* item 코드인데, 내부 설정 변경하기 위해 그냥 씀 */}
+                    <div>
+                      <img src={img} alt={img} className={styles.item_img} />
+                      <div>
+                        <div className={styles.item_name}>
+                          <div className={styles.category_name}>
+                            예약물품명: {item.category_name}
+                          </div>
+
+                          {/* <div>${category_id}</div> */}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             ) : null}
           </>
