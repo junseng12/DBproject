@@ -62,172 +62,172 @@ function ItemMgeForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
       console.log(error);
     }
 
-    setItems([
-      {
-        item_id: 1,
-        category_name: "충전기",
-      },
-      {
-        item_id: 2,
-        category_name: "충전기",
-      },
-      {
-        item_id: 3,
-        category_name: "충전기",
-      },
-      {
-        item_id: 4,
-        category_name: "충전기",
-      },
-      {
-        item_id: 5,
-        category_name: "충전기",
-      },
-      {
-        item_id: 6,
-        category_name: "충전기",
-      },
-      {
-        item_id: 7,
-        category_name: "충전기",
-      },
-      {
-        item_id: 8,
-        category_name: "마우스",
-      },
-      {
-        item_id: 9,
-        category_name: "마우스",
-      },
-      {
-        item_id: 10,
-        category_name: "마우스",
-      },
-      {
-        item_id: 11,
-        category_name: "마우스",
-      },
-      {
-        item_id: 12,
-        category_name: "마우스",
-      },
-      {
-        item_id: 13,
-        category_name: "우산",
-      },
-      {
-        item_id: 14,
-        category_name: "우산",
-      },
-      {
-        item_id: 15,
-        category_name: "우산",
-      },
-      {
-        item_id: 16,
-        category_name: "우산",
-      },
-      {
-        item_id: 17,
-        category_name: "우산",
-      },
-      {
-        item_id: 18,
-        category_name: "우산",
-      },
-      {
-        item_id: 19,
-        category_name: "우산",
-      },
-      {
-        item_id: 20,
-        category_name: "우산",
-      },
-      {
-        item_id: 21,
-        category_name: "보조배터리",
-      },
-      {
-        item_id: 22,
-        category_name: "보조배터리",
-      },
-      {
-        item_id: 23,
-        category_name: "보조배터리",
-      },
-      {
-        item_id: 24,
-        category_name: "보조배터리",
-      },
-      {
-        item_id: 25,
-        category_name: "보조배터리",
-      },
-      {
-        item_id: 26,
-        category_name: "보조배터리",
-      },
-      {
-        item_id: 27,
-        category_name: "보조배터리",
-      },
-      {
-        item_id: 28,
-        category_name: "공학용 계산기",
-      },
-      {
-        item_id: 29,
-        category_name: "공학용 계산기",
-      },
-      {
-        item_id: 30,
-        category_name: "공학용 계산기",
-      },
-      {
-        item_id: 31,
-        category_name: "공학용 계산기",
-      },
-      {
-        item_id: 32,
-        category_name: "공학용 계산기",
-      },
-      {
-        item_id: 33,
-        category_name: "공학용 계산기",
-      },
-      {
-        item_id: 34,
-        category_name: "공학용 계산기",
-      },
-      {
-        item_id: 35,
-        category_name: "머리끈",
-      },
-      {
-        item_id: 36,
-        category_name: "머리끈",
-      },
-      {
-        item_id: 37,
-        category_name: "머리끈",
-      },
-      {
-        item_id: 41,
-        category_name: "보드게임",
-      },
-      {
-        item_id: 42,
-        category_name: "보드게임",
-      },
-      {
-        item_id: 43,
-        category_name: "보드게임",
-      },
-      {
-        item_id: 44,
-        category_name: "보드게임",
-      },
-    ]);
+    // setItems([
+    //   {
+    //     item_id: 1,
+    //     category_name: "충전기",
+    //   },
+    //   {
+    //     item_id: 2,
+    //     category_name: "충전기",
+    //   },
+    //   {
+    //     item_id: 3,
+    //     category_name: "충전기",
+    //   },
+    //   {
+    //     item_id: 4,
+    //     category_name: "충전기",
+    //   },
+    //   {
+    //     item_id: 5,
+    //     category_name: "충전기",
+    //   },
+    //   {
+    //     item_id: 6,
+    //     category_name: "충전기",
+    //   },
+    //   {
+    //     item_id: 7,
+    //     category_name: "충전기",
+    //   },
+    //   {
+    //     item_id: 8,
+    //     category_name: "마우스",
+    //   },
+    //   {
+    //     item_id: 9,
+    //     category_name: "마우스",
+    //   },
+    //   {
+    //     item_id: 10,
+    //     category_name: "마우스",
+    //   },
+    //   {
+    //     item_id: 11,
+    //     category_name: "마우스",
+    //   },
+    //   {
+    //     item_id: 12,
+    //     category_name: "마우스",
+    //   },
+    //   {
+    //     item_id: 13,
+    //     category_name: "우산",
+    //   },
+    //   {
+    //     item_id: 14,
+    //     category_name: "우산",
+    //   },
+    //   {
+    //     item_id: 15,
+    //     category_name: "우산",
+    //   },
+    //   {
+    //     item_id: 16,
+    //     category_name: "우산",
+    //   },
+    //   {
+    //     item_id: 17,
+    //     category_name: "우산",
+    //   },
+    //   {
+    //     item_id: 18,
+    //     category_name: "우산",
+    //   },
+    //   {
+    //     item_id: 19,
+    //     category_name: "우산",
+    //   },
+    //   {
+    //     item_id: 20,
+    //     category_name: "우산",
+    //   },
+    //   {
+    //     item_id: 21,
+    //     category_name: "보조배터리",
+    //   },
+    //   {
+    //     item_id: 22,
+    //     category_name: "보조배터리",
+    //   },
+    //   {
+    //     item_id: 23,
+    //     category_name: "보조배터리",
+    //   },
+    //   {
+    //     item_id: 24,
+    //     category_name: "보조배터리",
+    //   },
+    //   {
+    //     item_id: 25,
+    //     category_name: "보조배터리",
+    //   },
+    //   {
+    //     item_id: 26,
+    //     category_name: "보조배터리",
+    //   },
+    //   {
+    //     item_id: 27,
+    //     category_name: "보조배터리",
+    //   },
+    //   {
+    //     item_id: 28,
+    //     category_name: "공학용 계산기",
+    //   },
+    //   {
+    //     item_id: 29,
+    //     category_name: "공학용 계산기",
+    //   },
+    //   {
+    //     item_id: 30,
+    //     category_name: "공학용 계산기",
+    //   },
+    //   {
+    //     item_id: 31,
+    //     category_name: "공학용 계산기",
+    //   },
+    //   {
+    //     item_id: 32,
+    //     category_name: "공학용 계산기",
+    //   },
+    //   {
+    //     item_id: 33,
+    //     category_name: "공학용 계산기",
+    //   },
+    //   {
+    //     item_id: 34,
+    //     category_name: "공학용 계산기",
+    //   },
+    //   {
+    //     item_id: 35,
+    //     category_name: "머리끈",
+    //   },
+    //   {
+    //     item_id: 36,
+    //     category_name: "머리끈",
+    //   },
+    //   {
+    //     item_id: 37,
+    //     category_name: "머리끈",
+    //   },
+    //   {
+    //     item_id: 41,
+    //     category_name: "보드게임",
+    //   },
+    //   {
+    //     item_id: 42,
+    //     category_name: "보드게임",
+    //   },
+    //   {
+    //     item_id: 43,
+    //     category_name: "보드게임",
+    //   },
+    //   {
+    //     item_id: 44,
+    //     category_name: "보드게임",
+    //   },
+    // ]);
   };
 
   // 신청 물품 조회 API 호출 함수 - 관리자
@@ -240,30 +240,30 @@ function ItemMgeForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
       console.log(error);
     }
 
-    setApplyList([
-      {
-        apply_id: 1,
-        apply_name: "무선 마우스",
-        reason: "202126878",
-        link: "손목 아파요",
-        student_id:
-          "https://www.lifesum.co.kr/goods/goods_view.php?goodsNo=1000000251&gclid=CjwKCAjw1YCkBhAOEiwA5aN4AXO2hbgVEJZ0B438Pz0zE-79ZQZIN3iXgs3iDdQcq4wALk7jH-4Q4BoCS7sQAvD_BwE",
-      },
-      {
-        apply_id: 2,
-        apply_name: "안경닦이",
-        reason: "202126878",
-        link: "",
-        student_id: "",
-      },
-      {
-        apply_id: 5,
-        apply_name: "슬리퍼",
-        reason: "202126878",
-        link: "",
-        student_id: "",
-      },
-    ]);
+    // setApplyList([
+    //   {
+    //     apply_id: 1,
+    //     apply_name: "무선 마우스",
+    //     reason: "202126878",
+    //     link: "손목 아파요",
+    //     student_id:
+    //       "https://www.lifesum.co.kr/goods/goods_view.php?goodsNo=1000000251&gclid=CjwKCAjw1YCkBhAOEiwA5aN4AXO2hbgVEJZ0B438Pz0zE-79ZQZIN3iXgs3iDdQcq4wALk7jH-4Q4BoCS7sQAvD_BwE",
+    //   },
+    //   {
+    //     apply_id: 2,
+    //     apply_name: "안경닦이",
+    //     reason: "202126878",
+    //     link: "",
+    //     student_id: "",
+    //   },
+    //   {
+    //     apply_id: 5,
+    //     apply_name: "슬리퍼",
+    //     reason: "202126878",
+    //     link: "",
+    //     student_id: "",
+    //   },
+    // ]);
 
     console.log(applyList);
   };

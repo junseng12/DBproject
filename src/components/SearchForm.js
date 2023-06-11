@@ -16,6 +16,7 @@ function SearchForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
   //물품 조회 종류(전체, 대여가능, 예약 가능)에 따른 filtering 조건
   const [showCondition, setShowCondition] = useState(0);
 
+  const [isRented, setIsRented] = useState({});
   // //사용자 정보 넣어놓기
   // const userInfo = loggedInUser;
   // const { student_id } = userInfo;
@@ -93,38 +94,39 @@ function SearchForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
     } catch (error) {
       console.log(error);
     }
-    // setItems([
-    //   {
-    //     category_name: "마우스",
-    //     numOfTotal: 5,
-    //     numOfAvailable: 5,
-    //   },
-    //   {
-    //     category_name: "충전기",
-    //     numOfTotal: 7,
-    //     numOfAvailable: 5,
-    //   },
-    //   {
-    //     category_name: "우산",
-    //     numOfTotal: 8,
-    //     numOfAvailable: 6,
-    //   },
-    //   {
-    //     category_name: "보조배터리",
-    //     numOfTotal: 7,
-    //     numOfAvailable: 6,
-    //   },
-    //   {
-    //     category_name: "공학용 계산기",
-    //     numOfTotal: 7,
-    //     numOfAvailable: 6,
-    //   },
-    //   {
-    //     category_name: "머리끈",
-    //     numOfTotal: 3,
-    //     numOfAvailable: 2,
-    //   },
-    // ]);
+    setItems([
+      {
+        category_name: "마우스",
+        numOfTotal: 5,
+        numOfAvailable: 5,
+      },
+      {
+        category_name: "충전기",
+        numOfTotal: 7,
+        numOfAvailable: 5,
+      },
+      {
+        category_name: "우산",
+        numOfTotal: 8,
+        numOfAvailable: 6,
+      },
+      {
+        category_name: "보조배터리",
+        numOfTotal: 7,
+        numOfAvailable: 6,
+      },
+      {
+        category_name: "공학용 계산기",
+        numOfTotal: 7,
+        numOfAvailable: 6,
+      },
+      {
+        category_name: "머리끈",
+        numOfTotal: 3,
+        numOfAvailable: 2,
+      },
+    ]);
+    console.log(items);
   };
 
   // 예약 가능한 물품 조회 API 호출 함수
@@ -132,17 +134,17 @@ function SearchForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
     try {
       const response = await axios.get("/item/list/available-reserve");
       setItems(response.data);
-      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
-    // setItems([
-    //   {
-    //     category_name: "보드게임",
-    //     numOfTotal: 4,
-    //     numOfAvailable: 0,
-    //   },
-    // ]);
+    setItems([
+      {
+        category_name: "보드게임",
+        numOfTotal: 4,
+        numOfAvailable: 0,
+      },
+    ]);
+    console.log(items);
   };
 
   const handlePageChange = (pageNumber) => {
@@ -160,28 +162,16 @@ function SearchForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
     const confirmation = window.confirm("물품 대여를 진행하시겠습니까?");
 
     if (confirmation) {
-      // 대여 가능한 경우
-      console.log("대여가능");
-
-      // 대여 API 호출
       try {
-        const response = await axios.post("/rent", {
-          rent_id: "대여번호",
-          start_date: new Date().toLocaleString(), // 대여 시각 (POST한 시각)
-          end_date: new Date().toLocaleString() + 14, // 대여 시각으로부터 2주로 고정
-          extension_num: 0,
-          student_id: student_id,
-          item_id: item.item_id,
-        });
+        // 대여 API 호출
+        const response = await axios.get(`/rent/${item.item_id}`);
 
         if (response.status === 201) {
           // 대여 성공
-          console.log(response.msg);
+          console.log("대여가 완료되었습니다.");
 
-          // ITEM 테이블에서 해당 물품 상태 대여중으로 업데이트
-          await axios.put(`/item/${item.item_id}`, {
-            status_id: "대여 중",
-          });
+          // Private 페이지로 이동
+          changeLogInpage("Private");
         } else {
           // 대여 실패
           console.log("대여에 실패했습니다.");
@@ -190,10 +180,16 @@ function SearchForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
         // 오류 처리
         console.error("대여 과정에서 오류가 발생했습니다.", error);
       }
-
-      // Private 페이지로 이동
-      changeLogInpage("Private");
     }
+
+    setIsRented({
+      msg: "대여가 완료되었습니다.",
+      status: 201,
+    });
+
+    console.log(isRented.msg);
+    // // Private 페이지로 이동
+    // changeLogInpage("Private");
   }
 
   async function handleReserve(event, item) {
@@ -203,15 +199,11 @@ function SearchForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
       // 예약 가능한 경우
       console.log("예약가능");
       // 예약 처리 로직
-      changeLogInpage("Private");
+      // changeLogInpage("Private");
 
       // 예약 API 호출
       try {
-        const response = await axios.post("/rent", {
-          reserve_id: "예약번호",
-          student_id: student_id,
-          category_id: item.category_id,
-        });
+        const response = await axios.get(`/reserve/${item.item_id}`);
 
         if (response.status === 201) {
           // 예약 성공
@@ -225,6 +217,12 @@ function SearchForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
         console.error("예약 과정에서 오류가 발생했습니다.", error);
       }
     }
+    setIsRented({
+      msg: "예약이 완료되었습니다.",
+      status: 201,
+    });
+
+    console.log(isRented);
   }
 
   if (!isLoggedIn) {

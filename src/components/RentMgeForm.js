@@ -16,10 +16,11 @@ function RentMgeForm({ isLoggedIn, changeLogInpage }) {
   //물품 조회 종류(전체, 대여가능, 예약 가능)에 따른 filtering 조건
   const [showCondition, setshowCondition] = useState(0);
   const [expiredItems, setExpiredItems] = useState([]);
+  const [lostItems, setLostItems] = useState([]);
   // //사용자 정보 넣어놓기
   // const userInfo = loggedInUser;
   // const { student_id } = userInfo;
-  const student_id = "202021062";
+  // const student_id = "202021062";
   //대여 현황 조회 API
   //연체 내역 조회 API
   //신고 내역 조회 API
@@ -33,7 +34,7 @@ function RentMgeForm({ isLoggedIn, changeLogInpage }) {
       fetchExpiredRentItems();
       //신고 내역 조회 API
     } else if (showCondition === 2) {
-      fetchAvailableReserveItems();
+      fetchLostItems();
     }
   }, [showCondition]);
 
@@ -84,6 +85,7 @@ function RentMgeForm({ isLoggedIn, changeLogInpage }) {
     //     end_date: "2023-06-06",
     //   },
     // ]);
+    console.log(items);
   };
 
   // 연체 내역 조회 API
@@ -97,34 +99,89 @@ function RentMgeForm({ isLoggedIn, changeLogInpage }) {
     }
     // setExpiredItems([
     //   {
-    //     item_id: 1,
-    //     category_name: "충전기",
-    //     student_id: "202126878",
-    //     start_date: "2023-05-31",
-    //     end_date: "2023-06-07",
-    //   },
-    //   {
     //     item_id: 13,
     //     category_name: "우산",
     //     student_id: "202326910",
     //     start_date: "2023-05-31",
     //     end_date: "2023-06-07",
+    //     overdue: 4,
+    //   },
+    //   {
+    //     item_id: 2,
+    //     category_name: "충전기",
+    //     student_id: "202326910",
+    //     start_date: "2023-05-31",
+    //     end_date: "2023-06-07",
+    //     overdue: 4,
+    //   },
+    //   {
+    //     item_id: 41,
+    //     category_name: "보드게임",
+    //     student_id: "202226412",
+    //     start_date: "2023-05-31",
+    //     end_date: "2023-06-07",
+    //     overdue: 4,
+    //   },
+    //   {
+    //     item_id: 42,
+    //     category_name: "보드게임",
+    //     student_id: "202226412",
+    //     start_date: "2023-06-01",
+    //     end_date: "2023-06-08",
+    //     overdue: 3,
+    //   },
+    //   {
+    //     item_id: 43,
+    //     category_name: "보드게임",
+    //     student_id: "202023442",
+    //     start_date: "2023-06-02",
+    //     end_date: "2023-06-09",
+    //     overdue: 2,
+    //   },
+    //   {
+    //     item_id: 44,
+    //     category_name: "보드게임",
+    //     student_id: "202023442",
+    //     start_date: "2023-06-02",
+    //     end_date: "2023-06-09",
+    //     overdue: 2,
     //   },
     // ]);
     console.log(expiredItems);
   };
 
   //신고 내역 조회 API
-  const fetchAvailableReserveItems = async () => {
+  const fetchLostItems = async () => {
     try {
-      const response = await axios.get("/item/list/available-reserve");
-      setItems(response.data);
-      console.log(response.data);
+      const response = await axios.get("/lost/list");
+      setLostItems(response.data);
     } catch (error) {
       console.log(error);
     }
-  };
 
+    // setLostItems([
+    //   {
+    //     item_id: 1,
+    //     category_name: "충전기",
+    //     student_id: "202126878",
+    //     lost_date: "2023-06-08",
+    //   },
+    //   {
+    //     item_id: 35,
+    //     category_name: "머리끈",
+    //     student_id: "202326910",
+    //     lost_date: "2023-06-06",
+    //   },
+    //   {
+    //     item_id: 14,
+    //     category_name: "우산",
+    //     student_id: "202326910",
+    //     lost_date: "2023-06-06",
+    //   },
+    // ]);
+
+    console.log(lostItems);
+  };
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -280,7 +337,7 @@ function RentMgeForm({ isLoggedIn, changeLogInpage }) {
                           </div>
                           <div>예상반납기간: {item.end_date}</div>
                           <div className={styles.expireditem}>
-                            {item.item_id} 일 째 연체 중
+                            {item.overdue} 일 째 연체 중
                           </div>
                           {/* <div>${category_id}</div> */}
                         </div>
@@ -294,7 +351,16 @@ function RentMgeForm({ isLoggedIn, changeLogInpage }) {
           {/* 신고내역 */}
           <>
             {showCondition === 2 ? (
-              <div className={styles.itemGrid}>신고 내역이 있습니다.</div>
+              <div>
+                {lostItems.map((item) => (
+                  <div key={item.item_id} className={styles.itemContainer2}>
+                    <div className={styles.applyitem}>
+                      물품아이디 : {item.item_id}
+                    </div>
+                    <div> 분실자 : {item.student_id}</div>
+                  </div>
+                ))}
+              </div>
             ) : null}
           </>
           <div className={styles.pagination}>

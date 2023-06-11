@@ -68,13 +68,13 @@ function Private({ isLoggedIn, changeLogInpage, loggedInUser }) {
       console.error(error);
     }
 
-    setUserInfo({
-      student_id: "202126878",
-      name: "신수민",
-      email: "tlsssm1212@ajou.ac.kr",
-      phone_num: "010-9337-6537",
-      department: "소프트웨어학과",
-    });
+    // setUserInfo({
+    //   student_id: "202126878",
+    //   name: "신수민",
+    //   email: "tlsssm1212@ajou.ac.kr",
+    //   phone_num: "010-9337-6537",
+    //   department: "소프트웨어학과",
+    // });
     console.log(userInfo);
   };
 
@@ -100,20 +100,20 @@ function Private({ isLoggedIn, changeLogInpage, loggedInUser }) {
       console.error(error);
     }
 
-    setRentalRecords([
-      {
-        item_id: 8,
-        category_name: "마우스",
-        start_date: "2023-06-08",
-        end_date: "2023-06-15",
-      },
-      {
-        item_id: 21,
-        category_name: "보조배터리",
-        start_date: "2023-06-08",
-        end_date: "2023-06-15",
-      },
-    ]);
+    // setRentalRecords([
+    //   {
+    //     item_id: 8,
+    //     category_name: "마우스",
+    //     start_date: "2023-06-08",
+    //     end_date: "2023-06-15",
+    //   },
+    //   {
+    //     item_id: 21,
+    //     category_name: "보조배터리",
+    //     start_date: "2023-06-08",
+    //     end_date: "2023-06-15",
+    //   },
+    // ]);
   };
 
   //대여 연장 API 함수
@@ -147,6 +147,28 @@ function Private({ isLoggedIn, changeLogInpage, loggedInUser }) {
     // }
   };
 
+  //분실 신고 API 함수
+  const handleReportLost = async (item) => {
+    const confirmation = window.confirm("분실 신고를 진행하시겠습니까?");
+
+    if (confirmation) {
+      try {
+        const response = await axios.get(`/lost/${item.item_id}`);
+
+        if (response.status === 200) {
+          // 분실 신고 성공
+          alert(response.data.msg);
+        } else {
+          alert("분실 신고에 실패했습니다.");
+        }
+      } catch (error) {
+        console.error("분실 신고 과정에서 오류가 발생했습니다.", error);
+      }
+    }
+
+    console.log("분실 신고 접수 완료");
+  };
+
   //예약 조회 API 함수
   const fetchReserveRecords = async () => {
     try {
@@ -163,12 +185,12 @@ function Private({ isLoggedIn, changeLogInpage, loggedInUser }) {
       console.error(error);
     }
 
-    setReserveData([
-      {
-        reserve_id: 1,
-        category_name: "보드게임",
-      },
-    ]);
+    // setReserveData([
+    //   {
+    //     reserve_id: 1,
+    //     category_name: "보드게임",
+    //   },
+    // ]);
     // 예약 목록 데이터를 처리하는 로직을 추가하세요
   };
 
@@ -259,6 +281,9 @@ function Private({ isLoggedIn, changeLogInpage, loggedInUser }) {
                               <div>대여일자: {item.start_date}</div>
                               <button onClick={() => handleExtendRental(index)}>
                                 연장하기
+                              </button>
+                              <button onClick={() => handleReportLost(item)}>
+                                분실 신고
                               </button>
                             </div>
                           </div>
