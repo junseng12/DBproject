@@ -45,43 +45,43 @@ function SearchForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
       console.log(error);
     }
 
-    setItems([
-      {
-        category_name: "마우스",
-        numOfTotal: 5,
-        numOfAvailable: 5,
-      },
-      {
-        category_name: "충전기",
-        numOfTotal: 7,
-        numOfAvailable: 5,
-      },
-      {
-        category_name: "우산",
-        numOfTotal: 8,
-        numOfAvailable: 6,
-      },
-      {
-        category_name: "보조배터리",
-        numOfTotal: 7,
-        numOfAvailable: 6,
-      },
-      {
-        category_name: "공학용 계산기",
-        numOfTotal: 7,
-        numOfAvailable: 6,
-      },
-      {
-        category_name: "머리끈",
-        numOfTotal: 3,
-        numOfAvailable: 2,
-      },
-      {
-        category_name: "보드게임",
-        numOfTotal: 4,
-        numOfAvailable: 0,
-      },
-    ]);
+    // setItems([
+    //   {
+    //     category_name: "마우스",
+    //     numOfTotal: 5,
+    //     numOfAvailable: 5,
+    //   },
+    //   {
+    //     category_name: "충전기",
+    //     numOfTotal: 7,
+    //     numOfAvailable: 5,
+    //   },
+    //   {
+    //     category_name: "우산",
+    //     numOfTotal: 8,
+    //     numOfAvailable: 6,
+    //   },
+    //   {
+    //     category_name: "보조배터리",
+    //     numOfTotal: 7,
+    //     numOfAvailable: 6,
+    //   },
+    //   {
+    //     category_name: "공학용 계산기",
+    //     numOfTotal: 7,
+    //     numOfAvailable: 6,
+    //   },
+    //   {
+    //     category_name: "머리끈",
+    //     numOfTotal: 3,
+    //     numOfAvailable: 2,
+    //   },
+    //   {
+    //     category_name: "보드게임",
+    //     numOfTotal: 4,
+    //     numOfAvailable: 0,
+    //   },
+    // ]);
   };
 
   // 대여 가능한 물품 조회 API 호출 함수
@@ -93,38 +93,38 @@ function SearchForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
     } catch (error) {
       console.log(error);
     }
-    setItems([
-      {
-        category_name: "마우스",
-        numOfTotal: 5,
-        numOfAvailable: 5,
-      },
-      {
-        category_name: "충전기",
-        numOfTotal: 7,
-        numOfAvailable: 5,
-      },
-      {
-        category_name: "우산",
-        numOfTotal: 8,
-        numOfAvailable: 6,
-      },
-      {
-        category_name: "보조배터리",
-        numOfTotal: 7,
-        numOfAvailable: 6,
-      },
-      {
-        category_name: "공학용 계산기",
-        numOfTotal: 7,
-        numOfAvailable: 6,
-      },
-      {
-        category_name: "머리끈",
-        numOfTotal: 3,
-        numOfAvailable: 2,
-      },
-    ]);
+    // setItems([
+    //   {
+    //     category_name: "마우스",
+    //     numOfTotal: 5,
+    //     numOfAvailable: 5,
+    //   },
+    //   {
+    //     category_name: "충전기",
+    //     numOfTotal: 7,
+    //     numOfAvailable: 5,
+    //   },
+    //   {
+    //     category_name: "우산",
+    //     numOfTotal: 8,
+    //     numOfAvailable: 6,
+    //   },
+    //   {
+    //     category_name: "보조배터리",
+    //     numOfTotal: 7,
+    //     numOfAvailable: 6,
+    //   },
+    //   {
+    //     category_name: "공학용 계산기",
+    //     numOfTotal: 7,
+    //     numOfAvailable: 6,
+    //   },
+    //   {
+    //     category_name: "머리끈",
+    //     numOfTotal: 3,
+    //     numOfAvailable: 2,
+    //   },
+    // ]);
   };
 
   // 예약 가능한 물품 조회 API 호출 함수
@@ -136,13 +136,13 @@ function SearchForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
     } catch (error) {
       console.log(error);
     }
-    setItems([
-      {
-        category_name: "보드게임",
-        numOfTotal: 4,
-        numOfAvailable: 0,
-      },
-    ]);
+    // setItems([
+    //   {
+    //     category_name: "보드게임",
+    //     numOfTotal: 4,
+    //     numOfAvailable: 0,
+    //   },
+    // ]);
   };
 
   const handlePageChange = (pageNumber) => {

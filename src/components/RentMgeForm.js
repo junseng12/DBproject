@@ -47,43 +47,43 @@ function RentMgeForm({ isLoggedIn, changeLogInpage }) {
       console.log(error);
     }
 
-    setItems([
-      {
-        item_id: 8,
-        category_name: "마우스",
-        student_id: "202126878",
-        start_date: "2023-06-08",
-        end_date: "2023-06-15",
-      },
-      {
-        item_id: 21,
-        category_name: "보조배터리",
-        student_id: "202126878",
-        start_date: "2023-06-08",
-        end_date: "2023-06-15",
-      },
-      {
-        item_id: 1,
-        category_name: "충전기",
-        student_id: "202126878",
-        start_date: "2023-05-31",
-        end_date: "2023-06-07",
-      },
-      {
-        item_id: 13,
-        category_name: "우산",
-        student_id: "202326910",
-        start_date: "2023-05-31",
-        end_date: "2023-06-07",
-      },
-      {
-        item_id: 28,
-        category_name: "공학용 계산기",
-        student_id: "202326910",
-        start_date: "2023-05-30",
-        end_date: "2023-06-06",
-      },
-    ]);
+    // setItems([
+    //   {
+    //     item_id: 8,
+    //     category_name: "마우스",
+    //     student_id: "202126878",
+    //     start_date: "2023-06-08",
+    //     end_date: "2023-06-15",
+    //   },
+    //   {
+    //     item_id: 21,
+    //     category_name: "보조배터리",
+    //     student_id: "202126878",
+    //     start_date: "2023-06-08",
+    //     end_date: "2023-06-15",
+    //   },
+    //   {
+    //     item_id: 1,
+    //     category_name: "충전기",
+    //     student_id: "202126878",
+    //     start_date: "2023-05-31",
+    //     end_date: "2023-06-07",
+    //   },
+    //   {
+    //     item_id: 13,
+    //     category_name: "우산",
+    //     student_id: "202326910",
+    //     start_date: "2023-05-31",
+    //     end_date: "2023-06-07",
+    //   },
+    //   {
+    //     item_id: 28,
+    //     category_name: "공학용 계산기",
+    //     student_id: "202326910",
+    //     start_date: "2023-05-30",
+    //     end_date: "2023-06-06",
+    //   },
+    // ]);
   };
 
   // 연체 내역 조회 API
@@ -95,22 +95,22 @@ function RentMgeForm({ isLoggedIn, changeLogInpage }) {
     } catch (error) {
       console.log(error);
     }
-    setExpiredItems([
-      {
-        item_id: 1,
-        category_name: "충전기",
-        student_id: "202126878",
-        start_date: "2023-05-31",
-        end_date: "2023-06-07",
-      },
-      {
-        item_id: 13,
-        category_name: "우산",
-        student_id: "202326910",
-        start_date: "2023-05-31",
-        end_date: "2023-06-07",
-      },
-    ]);
+    // setExpiredItems([
+    //   {
+    //     item_id: 1,
+    //     category_name: "충전기",
+    //     student_id: "202126878",
+    //     start_date: "2023-05-31",
+    //     end_date: "2023-06-07",
+    //   },
+    //   {
+    //     item_id: 13,
+    //     category_name: "우산",
+    //     student_id: "202326910",
+    //     start_date: "2023-05-31",
+    //     end_date: "2023-06-07",
+    //   },
+    // ]);
     console.log(expiredItems);
   };
 

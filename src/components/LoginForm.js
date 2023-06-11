@@ -109,7 +109,7 @@ const LoginForm = ({ handleLogin, saveLoginInfo }) => {
       ) : (
         <>
           {isLoggedIn ? null : (
-            <form onSubmit={handleSubmit} className={styles.container}>
+            <form onSubmit={checkLogin} className={styles.container}>
               <div className={styles.line}>
                 <label htmlFor="studentId" className={styles.label}>
                   학번
