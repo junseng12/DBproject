@@ -370,7 +370,7 @@ function ItemMgeForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
               {currentItems.map((item) => (
                 <div key={item.item_id} className={styles.itemContainer2}>
                   <div className={styles.applyitem}>
-                    물품아이디 : {item.item_id} 물품명 : {item.category_name}
+                    물품아이디 : {item.item_id} / 물품명 : {item.category_name}
                   </div>
                   <button
                     onClick={() => deleteItem(item)}
@@ -390,7 +390,7 @@ function ItemMgeForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
               {applyList.map((item) => (
                 <div key={item.apply_id} className={styles.itemContainer2}>
                   <div className={styles.applyitem}>
-                    물품명 : {item.apply_name} 신청사유 : {item.reason}
+                    물품명 : {item.apply_name} / 신청사유 : {item.reason}
                   </div>
                 </div>
               ))}
