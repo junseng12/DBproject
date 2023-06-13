@@ -308,23 +308,36 @@ function Private({ isLoggedIn, changeLogInpage, loggedInUser }) {
           <>
             {showCondition === 2 ? (
               <div className={styles.itemGrid}>
-                {reserveData.map((item) => (
-                  <div key={item.reserve_id} className={styles.itemContainer2}>
-                    {/* item 코드인데, 내부 설정 변경하기 위해 그냥 씀 */}
-                    <div>
-                      <img src={img} alt={img} className={styles.item_img} />
-                      <div>
-                        <div className={styles.item_name}>
-                          <div className={styles.category_name}>
-                            예약물품명: {item.category_name}
-                          </div>
+                {rentalRecords.length > 0 ? (
+                  <ul className={styles.applyRecordsList}>
+                    {reserveData.map((item) => (
+                      <div
+                        key={item.reserve_id}
+                        className={styles.itemContainer2}
+                      >
+                        {/* item 코드인데, 내부 설정 변경하기 위해 그냥 씀 */}
+                        <div>
+                          <img
+                            src={img}
+                            alt={img}
+                            className={styles.item_img}
+                          />
+                          <div>
+                            <div className={styles.item_name}>
+                              <div className={styles.category_name}>
+                                예약물품명: {item.category_name}
+                              </div>
 
-                          {/* <div>${category_id}</div> */}
+                              {/* <div>${category_id}</div> */}
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                ))}
+                    ))}
+                  </ul>
+                ) : (
+                  <p>예약 현황이 없습니다.</p>
+                )}
               </div>
             ) : null}
           </>

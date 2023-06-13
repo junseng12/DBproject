@@ -97,56 +97,56 @@ function RentMgeForm({ isLoggedIn, changeLogInpage }) {
     } catch (error) {
       console.log(error);
     }
-    setExpiredItems([
-      {
-        item_id: 13,
-        category_name: "우산",
-        student_id: "202326910",
-        start_date: "2023-05-31",
-        end_date: "2023-06-07",
-        overdue: 4,
-      },
-      {
-        item_id: 2,
-        category_name: "충전기",
-        student_id: "202326910",
-        start_date: "2023-05-31",
-        end_date: "2023-06-07",
-        overdue: 4,
-      },
-      {
-        item_id: 41,
-        category_name: "보드게임",
-        student_id: "202226412",
-        start_date: "2023-05-31",
-        end_date: "2023-06-07",
-        overdue: 4,
-      },
-      {
-        item_id: 42,
-        category_name: "보드게임",
-        student_id: "202226412",
-        start_date: "2023-06-01",
-        end_date: "2023-06-08",
-        overdue: 3,
-      },
-      {
-        item_id: 43,
-        category_name: "보드게임",
-        student_id: "202023442",
-        start_date: "2023-06-02",
-        end_date: "2023-06-09",
-        overdue: 2,
-      },
-      {
-        item_id: 44,
-        category_name: "보드게임",
-        student_id: "202023442",
-        start_date: "2023-06-02",
-        end_date: "2023-06-09",
-        overdue: 2,
-      },
-    ]);
+    // setExpiredItems([
+    //   {
+    //     item_id: 13,
+    //     category_name: "우산",
+    //     student_id: "202326910",
+    //     start_date: "2023-05-31",
+    //     end_date: "2023-06-07",
+    //     overdue: 4,
+    //   },
+    //   {
+    //     item_id: 2,
+    //     category_name: "충전기",
+    //     student_id: "202326910",
+    //     start_date: "2023-05-31",
+    //     end_date: "2023-06-07",
+    //     overdue: 4,
+    //   },
+    //   {
+    //     item_id: 41,
+    //     category_name: "보드게임",
+    //     student_id: "202226412",
+    //     start_date: "2023-05-31",
+    //     end_date: "2023-06-07",
+    //     overdue: 4,
+    //   },
+    //   {
+    //     item_id: 42,
+    //     category_name: "보드게임",
+    //     student_id: "202226412",
+    //     start_date: "2023-06-01",
+    //     end_date: "2023-06-08",
+    //     overdue: 3,
+    //   },
+    //   {
+    //     item_id: 43,
+    //     category_name: "보드게임",
+    //     student_id: "202023442",
+    //     start_date: "2023-06-02",
+    //     end_date: "2023-06-09",
+    //     overdue: 2,
+    //   },
+    //   {
+    //     item_id: 44,
+    //     category_name: "보드게임",
+    //     student_id: "202023442",
+    //     start_date: "2023-06-02",
+    //     end_date: "2023-06-09",
+    //     overdue: 2,
+    //   },
+    // ]);
     console.log(expiredItems);
   };
 
@@ -300,14 +300,27 @@ function RentMgeForm({ isLoggedIn, changeLogInpage }) {
                 status_id={item.status_id}
               /> */}
                 {currentItems.map((item) => (
-                  <div key={item.item_id} className={styles.itemContainer2}>
-                    <div className={styles.applyitem}>
+                  <div
+                    key={item.item_id}
+                    className={styles.itemContainer2}
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      margin: "10px",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <div style={{ width: "300px" }}>
                       물품아이디 : {item.item_id}
                     </div>
-                    <div> / 대여자 : {item.student_id}</div>
+                    <div style={{ width: "300px" }}>
+                      대여자 : {item.student_id}
+                    </div>
                     <button
+                      style={{ width: "100px" }}
+                      className={styles.btn}
                       onClick={() => handleReturn(item)}
-                      style={{ float: "left" }}
                     >
                       반납승인
                     </button>
@@ -353,9 +366,22 @@ function RentMgeForm({ isLoggedIn, changeLogInpage }) {
             {showCondition === 2 ? (
               <div>
                 {lostItems.map((item) => (
-                  <div key={item.item_id} className={styles.itemContainer2}>
-                    <div className={styles.applyitem}>
-                      물품아이디 : {item.item_id} / 분실자 : {item.student_id}
+                  <div
+                    key={item.item_id}
+                    className={styles.itemContainer2}
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      margin: "10px",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <div style={{ width: "300px" }}>
+                      물품아이디 : {item.item_id}
+                    </div>
+                    <div style={{ width: "300px" }}>
+                      분실자 : {item.student_id}
                     </div>
                   </div>
                 ))}

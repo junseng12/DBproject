@@ -368,13 +368,28 @@ function ItemMgeForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
                   status_id={item.status_id}
                 /> */}
               {currentItems.map((item) => (
-                <div key={item.item_id} className={styles.itemContainer2}>
-                  <div className={styles.applyitem}>
-                    물품아이디 : {item.item_id} / 물품명 : {item.category_name}
+                <div
+                  key={item.item_id}
+                  className={styles.itemContainer2}
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    margin: "10px",
+                    justifyContent: "center",
+                  }}
+                >
+                  <div style={{ width: "300px" }}>
+                    물품아이디 : {item.item_id}
                   </div>
+                  <div style={{ width: "300px" }}>
+                    물품명 : {item.category_name}
+                  </div>
+
                   <button
                     onClick={() => deleteItem(item)}
-                    style={{ float: "left" }}
+                    className={styles.btn}
+                    style={{ width: "100px" }}
                   >
                     물품삭제
                   </button>
@@ -388,10 +403,21 @@ function ItemMgeForm({ isLoggedIn, changeLogInpage, loggedInUser }) {
           {showCondition === 1 ? (
             <div>
               {applyList.map((item) => (
-                <div key={item.apply_id} className={styles.itemContainer2}>
-                  <div className={styles.applyitem}>
-                    물품명 : {item.apply_name} / 신청사유 : {item.reason}
+                <div
+                  key={item.apply_id}
+                  className={styles.itemContainer2}
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    margin: "10px",
+                    justifyContent: "center",
+                  }}
+                >
+                  <div style={{ width: "300px" }}>
+                    물품명 : {item.apply_name}
                   </div>
+                  <div style={{ width: "300px" }}>신청사유 : {item.reason}</div>
                 </div>
               ))}
             </div>
