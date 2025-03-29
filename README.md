@@ -23,8 +23,7 @@ Contact
 
 Overview
 This service allows users to browse, request, and manage the rental of various school equipment.
-The frontend, built with React JS, enables users to view equipment listings, submit rental requests, and monitor rental statuses.
-The actual data processing and business logic are handled by a separately managed backend.
+The frontend, built with React JS, enables users to view equipment listings, submit rental requests, and monitor rental statuses. The actual data processing and business logic are handled by a separately managed backend.
 
 Features
 Responsive UI: Optimized user experience across various devices.
@@ -66,7 +65,7 @@ npm install
 yarn install
 Set up environment variables:
 
-Create a .env file in the project root with the following content:
+Create a .env file in the root directory with the following content:
 
 env
 복사
@@ -80,21 +79,21 @@ bash
 npm start
 # or
 yarn start
-The app will run at http://localhost:3000
+The app will be available at http://localhost:3000
 
 Usage
-Browse equipment list and details
+Browse equipment list and view detailed info
 
 Submit rental requests
 
-View personal rental history on dashboard
+Check rental status and history on dashboard
 
 (With backend) Log in and manage your profile
 
 Environment Setup
-package.json: handles dependencies and scripts
+package.json: handles project dependencies and scripts
 
-.env: defines environment-specific configs like API URLs
+.env: defines environment-specific configuration such as API URL
 
 Contributing
 Contributions are welcome!
@@ -102,18 +101,27 @@ Contributions are welcome!
 Fork this repository
 
 Create a new branch:
+
+bash
+복사
+편집
 git checkout -b feature/your-feature-name
-
 Commit your changes:
+
+bash
+복사
+편집
 git commit -m "Add your feature"
-
 Push the branch:
-git push origin feature/your-feature-name
 
+bash
+복사
+편집
+git push origin feature/your-feature-name
 Open a Pull Request
 
 License
 This project is licensed under the MIT License
 
 Contact
-For questions or suggestions, contact: your-email@example.com
+For any questions or suggestions, please contact your-email@example.com
