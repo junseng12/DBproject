@@ -1,7 +1,10 @@
 # School Equipment Rental and Management Service (Frontend)
 
-This repository, located at [junseng12/DBproject](https://github.com/junseng12/DBproject), contains the **React JS-based frontend** code for the School Equipment Rental and Management Service project.  
-**Note:** The backend API, database, and authentication logic are implemented separately by another team member and integrated into this project.
+This repository, located at [junseng12/DBproject](https://github.com/junseng12/DBproject), contains **only the React JS-based frontend code** for the School Equipment Rental and Management Service project.  
+It consists mainly of reusable frontend components and pages.
+
+⚠️ **Please note:** This project **does not include backend code** (e.g., API, database, authentication).  
+To run this project in a fully functional state, you must connect it to a separately implemented backend server.
 
 ## Table of Contents
 
