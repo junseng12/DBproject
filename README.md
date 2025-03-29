@@ -1,70 +1,119 @@
-# Getting Started with Create React App
+School Equipment Rental and Management Service (Frontend)
+This repository, located at junseng12/DBproject, contains the React JS-based frontend code for the School Equipment Rental and Management Service project.
+Note: The backend API, database, and authentication logic are implemented separately by another team member and integrated into this project.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Table of Contents
+Overview
 
-## Available Scripts
+Features
 
-In the project directory, you can run:
+Tech Stack
 
-### `npm start`
+Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Usage
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Environment Setup
 
-### `npm test`
+Contributing
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+License
 
-### `npm run build`
+Contact
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Overview
+This service allows users to browse, request, and manage the rental of various school equipment.
+The frontend, built with React JS, enables users to view equipment listings, submit rental requests, and monitor rental statuses. The actual data processing and business logic are handled by a separately managed backend.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Features
+Responsive UI: Optimized user experience across various devices.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Equipment Catalog: Search and view detailed information on available school equipment.
 
-### `npm run eject`
+Rental Requests: Submit and monitor rental requests.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Dashboard: View user rental history, active requests, and upcoming returns.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Real-time Notifications: Get status updates through backend integration.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Tech Stack
+Frontend: React JS, HTML5, CSS3, JavaScript (ES6+)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Package Manager: npm or yarn
 
-## Learn More
+Build Tool: Create React App (or a similar tool)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Version Control: Git, GitHub
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Installation
+Clone the repository:
 
-### Code Splitting
+bash
+복사
+편집
+git clone https://github.com/junseng12/DBproject.git
+cd DBproject
+Install dependencies:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Ensure that Node.js is installed, then run:
 
-### Analyzing the Bundle Size
+nginx
+복사
+편집
+npm install
+# or if using yarn:
+yarn install
+Set up environment variables:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Create a .env file in the project root for API endpoints and other settings:
 
-### Making a Progressive Web App
+ini
+복사
+편집
+REACT_APP_API_URL=https://your-backend-api-url.com
+Run the project:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+sql
+복사
+편집
+npm start
+# or if using yarn:
+yarn start
+The project will be available at http://localhost:3000.
 
-### Advanced Configuration
+Usage
+Equipment Browsing: View the list of available equipment and detailed descriptions on the homepage.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Rental Requests: Initiate rental requests for desired equipment and track request statuses on the dashboard.
 
-### Deployment
+User Profile Management: (Integrated with backend) Manage personal details and view rental history after logging in.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Environment Setup
+package.json: Manages project dependencies and scripts.
 
-### `npm run build` fails to minify
+.env: Stores API endpoints and other environment-specific settings.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+For additional configurations or customizations, please refer to the React documentation.
+
+Contributing
+Contributions are welcome!
+If you'd like to contribute, please follow these steps:
+
+Fork the repository.
+
+Create a new branch:
+git checkout -b feature/new-feature
+
+Commit your changes:
+git commit -m 'Add new feature'
+
+Push your branch:
+git push origin feature/new-feature
+
+Open a Pull Request.
+
+License
+This project is licensed under the MIT License.
+
+Contact
+For any questions or suggestions, please contact your-email@example.com.
